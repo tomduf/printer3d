@@ -1,11 +1,112 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<div id="instructions">
+    <header>
+        <h1><%= title %></h1>
+    </header>
+    <div id="main" role="main">
+        <h2>Checklist</h2>
+        <ol>
+            <li>
+                Vérifier que les images sont déposées dans le dossier <strong>slices</strong> avec un classement
+                alphabétique.
+            </li>
+            <li>
+                Prendre les références de l'axe z.
+            </li>
+            <li>
+                Vérifier la quantité de résine.
+            </li>
+            <li>
+                Préparer le kit de nettoyage à température ambiante.
+            </li>
+        </ol>
+        <h2>Mise au point</h2>
+
+        <p>
+            Appuyer sur Entrée une première fois pour afficher la mise au point puis une seconde fois pour lancer
+            l'impression.
+        </p>
+
+    </div>
+    <footer>
+        <p>
+            <%= thumbFichiers.length %> diapositives préchargées (voir ci-dessous)
+        </p>
+
+        <p>
+            <input type="button" value="Afficher la mire" id="boutonMire"/>
+        </p>
+    </footer>
+</div>
+<div id="images">
+    <!-- Oouverture de toutes les vignettes -->
+    <img src="/images/mire_mise_au_point.png" id="mire"/>
+    <% if (thumbFichiers.length) { %>
+    <% thumbFichiers.forEach(function(thumbFichier){ %>
+    <img src="/thumb-slices/<%= thumbFichier %>" class="thumb"/>
+    <% }) %>
+    <% } %>
+    <img id="diapoActive"/>
+</div>
+<!--! end of #container -->
+
+<!-- JavaScript at the bottom for fast page loading -->
+
+<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="jquery-1.6.2.min.js"><\/script>')
+</script>
+
+<script>
+    $(document).ready(function () {
+        var tempoVisible = 3000;
+        var tempoCache = 1000;
+        var cycleDemarre = false;
+        var imageActive = $("#diapoActive");
+        var i = 0;
+        var nbDiapos = <%=diaposFichiers.length%>;
+        $('#mire').hide();
+        imageActive.hide();
+        // déclaration de la mire comme image active (elle doit être la première image dans le HTML)
+        $("#boutonMire").click(function () {// si appui sur le bouton
+            $('body').mouseover(function () {// il est important de chacher le curseur pour qu'il ne polymérise pas la résine...
+                $(this).css({
+                    cursor: 'none'
+                });
+            }).css("background-color", "black").css("color", "red");
+            // arrière-plan rouge avant basculement du miroir et mise au point
+            $("#instructions").fadeOut(0, function () {// disparition des consignes
+                $('img[class="thumb"]').remove();
+                // on libère la mémoire de toutes les vignettes
+                $('#mire').fadeIn(2000, function () {// apparition de la mire
+                    $("body").keypress(function (e) {
+                        if (e.which == 13) {// si appui sur ENTER
+                            cycleDemarre = true;
+                            $('#mire').fadeOut(2000, function impression() {// fonction récursive qui épuise toutes les images disponibles
+                                if (cycleDemarre && i < nbDiapos) {
+                                    $.get('/diapo/' + i++, function (diapoActive) {
+                                        console.log("> diapositive active n°" + i + "/" + nbDiapos + " : " + diapoActive);
+                                        imageActive.attr({
+                                            src: '/slices/' + diapoActive
+                                        }).delay(tempoCache).fadeIn(0).delay(tempoVisible).fadeOut(0).delay(tempoCache).fadeIn(0).delay(tempoVisible).fadeOut(0).delay(tempoCache).fadeIn(0).delay(tempoVisible).fadeOut(0, impression);
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        });
+    });
+</script>
+<!-- end scripts-->
+
+</body>
 </html>
