@@ -6,3 +6,12 @@ body {
 a {
   color: #00B7FF;
 }
+
+#mire {
+    display: none;
+}
+
+
+#diapoActive {
+    display: none;
+}
