@@ -10,6 +10,16 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var i2c = require('i2c');
+
+// Adresse de l'Arduino
+var arduino = 0x05;
+var accel = 0x44;
+
+// Connexion avec l'Arduino
+var wireArduino = new i2c(arduino, {device: '/dev/i2c-1'});
+// Connexion avec l'accéléromètre
+var wireAccel = new i2c(accel, {device: '/dev/i2c-1'});
 
 var app = express();
 var dossier_diapos = path.join(__dirname, 'public/slices');
@@ -44,6 +54,27 @@ main();
 
 // Récupération des vignettes des diapos par lecture du dossier
 function main() {
+	wireArduino.scan(function(err, tab_periphs_i2c) {
+	  // Scan des périphériques i2c
+	  if (!err){
+		  console.log("> " + tab_periphs_i2c.length + " périphériques i2c détectés :");
+		  tab_periphs_i2c.forEach(function(periph_i2c){
+			console.log("0x" + periph_i2c.toString(16)) ;
+		 });
+	  }
+	});
+	
+	// Écriture d'un octet
+	wireArduino.writeByte(0x01, function(err){
+		console.log("Erreur: " + err);
+	});
+
+	// Lecture d'un octet
+	wireArduino.readByte(function(err,res){
+		console.log("Octet de réponse de l'Arduino: " + res.toString(16));
+	});
+	
+	// Lecture du dossier des miniatures	
     fs.readdir(dossier_miniatures, function(err1, fichiersThumb) {
         if (err1) {
             console.log("> les miniatures n'existent pas, création automatique en cours...");
