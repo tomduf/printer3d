@@ -49,6 +49,15 @@ app.get('/users', user.list);
 // Message de bienvenue
 console.log('Serveur imprimante 3D - Lycée Condorcet');
 
+// Réception de données i2c Arduino
+wireArduino.on('data', function(data) {
+  // result for continuous stream contains data buffer, address, length, timestamp
+  for (var i = 0; i < data.length; i++){
+	console.log(data[i]);
+   }
+});
+
+
 // Démarrage
 main();
 
@@ -64,14 +73,9 @@ function main() {
 	  }
 	});
 	
-	// Écriture d'un octet
-	wireArduino.writeByte(0x01, function(err){
-		console.log("Erreur: " + err);
-	});
-
 	// Lecture d'un octet
 	wireArduino.readByte(function(err,res){
-		console.log("Octet de réponse de l'Arduino: " + res.toString(16));
+		console.log("Etat du mode de l'Arduino: " + res.toString(16));
 	});
 	
 	// Lecture du dossier des miniatures	
@@ -104,7 +108,18 @@ function main() {
 
                 // Appel d'une diapo par passage de paramètre
                 app.get('/diapo/:num_diapo', function(req, res) {
-                    res.send(fichiersDiapos[req.params.num_diapo]);
+					if (req.params.num_diapo > 0){
+						// Écriture d'un octet
+						wireArduino.writeByte(0x09, function(err){});
+						while (wireArduino.readByte(function(err,res){
+							if (res != 8) return true;								
+						}))
+						{
+							console.log("Cycle moteur en cours...");								
+						}
+					}
+					res.send(fichiersDiapos[req.params.num_diapo]);
+                    
                 });
 
                 http.createServer(app).listen(app.get('port'), function(){
