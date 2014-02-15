@@ -106,19 +106,28 @@ function main() {
                     });
                 });
 
-                // Appel d'une diapo par passage de paramètre
+                // Appel d'une diapo et cycle moteur
                 app.get('/diapo/:num_diapo', function(req, res) {
 					if (req.params.num_diapo > 0){
 						// Lancement d'un cycle moteur
 						wireArduino.writeByte(0x09, function(err){});
-						console.log("Cycle moteur en cours...");								
+						process.stdout.write("Cycle moteur en cours...");
+						var count = 0;								
 						while (wireArduino.readByte(function(err,res){
 							if (res != 8) return true;								
 						}))
 						{
-							process.stdout.write(".");
+							if (count == 250){ // affichage temporisé des points
+								process.stdout.write(".");
+								count = 0;
+							}
+							count++;
 						}
+						console.log("");
+						console.log("Cycle moteur terminé");
+						console.log("Plateau remonté pour la couche suivante");								
 					}
+					console.log("Affichage de la diapo " + req.params.num_diapo + "/" + fichiersDiapos.length);								
 					res.send(fichiersDiapos[req.params.num_diapo]);
                     
                 });
