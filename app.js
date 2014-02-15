@@ -109,13 +109,14 @@ function main() {
                 // Appel d'une diapo par passage de paramètre
                 app.get('/diapo/:num_diapo', function(req, res) {
 					if (req.params.num_diapo > 0){
-						// Écriture d'un octet
+						// Lancement d'un cycle moteur
 						wireArduino.writeByte(0x09, function(err){});
+						console.log("Cycle moteur en cours...");								
 						while (wireArduino.readByte(function(err,res){
 							if (res != 8) return true;								
 						}))
 						{
-							console.log("Cycle moteur en cours...");								
+							process.stdout.write(".");
 						}
 					}
 					res.send(fichiersDiapos[req.params.num_diapo]);
