@@ -62,7 +62,7 @@ function main() {
         } else {
             fs.readdir(dossier_diapos, function(err2, fichiersDiapos) {
 
-                // Template de la page principale (avec le module ejs)
+                // Template de la page HTML principale (avec le module ejs)
                 app.get('/', function(req, res) {
                     res.render('index', {
                         title : 'Imprimante 3D - Lycée Condorcet / Montreuil',
