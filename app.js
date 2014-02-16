@@ -10,6 +10,16 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var i2c = require('i2c');
+
+// Adresse de l'Arduino
+var arduino = 0x05;
+var accel = 0x44;
+
+// Connexion avec l'Arduino
+var wireArduino = new i2c(arduino, {device: '/dev/i2c-1'});
+// Connexion avec l'accéléromètre
+var wireAccel = new i2c(accel, {device: '/dev/i2c-1'});
 
 var app = express();
 var dossier_diapos = path.join(__dirname, 'public/slices');
@@ -39,11 +49,36 @@ app.get('/users', user.list);
 // Message de bienvenue
 console.log('Serveur imprimante 3D - Lycée Condorcet');
 
+// Réception de données i2c Arduino
+wireArduino.on('data', function(data) {
+  // result for continuous stream contains data buffer, address, length, timestamp
+  for (var i = 0; i < data.length; i++){
+	console.log(data[i]);
+   }
+});
+
+
 // Démarrage
 main();
 
 // Récupération des vignettes des diapos par lecture du dossier
 function main() {
+	wireArduino.scan(function(err, tab_periphs_i2c) {
+	  // Scan des périphériques i2c
+	  if (!err){
+		  console.log("> " + tab_periphs_i2c.length + " périphériques i2c détectés :");
+		  tab_periphs_i2c.forEach(function(periph_i2c){
+			console.log("0x" + periph_i2c.toString(16)) ;
+		 });
+	  }
+	});
+	
+	// Lecture d'un octet
+	wireArduino.readByte(function(err,res){
+		console.log("Etat du mode de l'Arduino: " + res.toString(16));
+	});
+	
+	// Lecture du dossier des miniatures	
     fs.readdir(dossier_miniatures, function(err1, fichiersThumb) {
         if (err1) {
             console.log("> les miniatures n'existent pas, création automatique en cours...");
@@ -71,9 +106,30 @@ function main() {
                     });
                 });
 
-                // Appel d'une diapo par passage de paramètre
+                // Appel d'une diapo et cycle moteur
                 app.get('/diapo/:num_diapo', function(req, res) {
-                    res.send(fichiersDiapos[req.params.num_diapo]);
+					if (req.params.num_diapo > 0){
+						// Lancement d'un cycle moteur
+						wireArduino.writeByte(0x09, function(err){});
+						process.stdout.write("Cycle moteur en cours...");
+						var count = 0;								
+						while (wireArduino.readByte(function(err,res){
+							if (res != 8) return true;								
+						}))
+						{
+							if (count == 250){ // affichage temporisé des points
+								process.stdout.write(".");
+								count = 0;
+							}
+							count++;
+						}
+						console.log("");
+						console.log("Cycle moteur terminé");
+						console.log("Plateau remonté pour la couche suivante");								
+					}
+					console.log("Affichage de la diapo " + req.params.num_diapo + "/" + fichiersDiapos.length);								
+					res.send(fichiersDiapos[req.params.num_diapo]);
+                    
                 });
 
                 http.createServer(app).listen(app.get('port'), function(){
