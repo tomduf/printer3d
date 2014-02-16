@@ -7,13 +7,13 @@
 <body>
 <div id="instructions">
     <header>
-        <h1><%= title %></h1>
+        <h1>Imprimante 3D</h1>
+        <h2>Lycée Condorcet - Montreuil</h2>
     </header>
     <div id="main" role="main">
-        <h2>Checklist</h2>
         <ol>
             <li>
-                Vérifier que les images sont déposées dans le dossier <strong>slices</strong> avec un classement
+                Vérifier que les vignettes ci-dessous correspondent bien aux diapositives à projeter. Elle doivent être déposées dans le dossier <strong>slices</strong> avec un classement
                 alphabétique.
             </li>
             <li>
@@ -25,22 +25,18 @@
             <li>
                 Préparer le kit de nettoyage à température ambiante.
             </li>
+            <li>
+                Cliquer sur le bouton ci-dessous une première fois pour afficher la mise au point puis appuyer sur Entrée pour lancer
+                l'impression.
+            </li>
         </ol>
-        <h2>Mise au point</h2>
-
-        <p>
-            Appuyer sur Entrée une première fois pour afficher la mise au point puis une seconde fois pour lancer
-            l'impression.
-        </p>
-
     </div>
     <footer>
         <p>
-            <%= thumbFichiers.length %> diapositives préchargées (voir ci-dessous)
-        </p>
-
-        <p>
             <input type="button" value="Afficher la mire" id="boutonMire"/>
+        </p>
+        <p>
+            <%= thumbFichiers.length %> diapositives préchargées
         </p>
     </footer>
 </div>
@@ -49,7 +45,7 @@
     <img src="/images/mire_mise_au_point.png" id="mire"/>
     <% if (thumbFichiers.length) { %>
     <% thumbFichiers.forEach(function(thumbFichier){ %>
-    <img src="/thumb-slices/<%= thumbFichier %>" class="thumb"/>
+    <img src="/thumb-slices/<%= thumbFichier %>" height="40" width="40" class="thumb"/>
     <% }) %>
     <% } %>
     <img id="diapoActive"/>
@@ -59,9 +55,9 @@
 <!-- JavaScript at the bottom for fast page loading -->
 
 <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <script>
-    window.jQuery || document.write('<script src="jquery-1.6.2.min.js"><\/script>')
+    window.jQuery || document.write('<script src="third_party/jquery-2.1.0.min.js"><\/script>')
 </script>
 
 <script>
@@ -72,8 +68,6 @@
         var imageActive = $("#diapoActive");
         var i = 0;
         var nbDiapos = <%=diaposFichiers.length%>;
-        $('#mire').hide();
-        imageActive.hide();
         // déclaration de la mire comme image active (elle doit être la première image dans le HTML)
         $("#boutonMire").click(function () {// si appui sur le bouton
             $('body').mouseover(function () {// il est important de chacher le curseur pour qu'il ne polymérise pas la résine...
@@ -106,7 +100,7 @@
         });
     });
 </script>
-<!-- end scripts-->
+<!-- end third_party-->
 
 </body>
 </html>
