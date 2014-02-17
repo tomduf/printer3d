@@ -112,7 +112,8 @@ function main() {
 						// Lancement d'un cycle moteur
 						wireArduino.writeByte(0x09, function(err){});
 						process.stdout.write("Cycle moteur en cours...");
-						var count = 0;								
+						var count = 0;
+                        // Tant que l'Arduino ne répond pas 8 (fin du cycle moteur)
 						while (wireArduino.readByte(function(err,res){
 							if (res != 8) return true;								
 						}))
@@ -130,6 +131,29 @@ function main() {
 					console.log("Affichage de la diapo " + req.params.num_diapo + "/" + fichiersDiapos.length);								
 					res.send(fichiersDiapos[req.params.num_diapo]);
                     
+                });
+                // Appel de la fin d'impression
+                app.get('/fin', function(req, res) {
+                    // Lancement d'un cycle moteur
+                    wireArduino.writeByte(0x07, function(err){});
+                    process.stdout.write("Impression terminée, remontée du  plateau en cours...");
+                    var count = 0;
+                    // Tant que l'Arduino ne répond pas 6 (fin de la remontée du plateau)
+                    while (wireArduino.readByte(function(err,res){
+                        if (res != 6) return true;
+                    }))
+                    {
+                        if (count == 250){ // affichage temporisé des points
+                            process.stdout.write(".");
+                            count = 0;
+                        }
+                        count++;
+                    }
+                    console.log("");
+                    console.log("> Plateau remonté. Impression terminée");
+                    console.log("> Interposer le miroir");
+                    console.log("> Retirer le bain de résine");
+                    console.log("> Insérer le bac de rinçage à température ambiante");
                 });
 
                 http.createServer(app).listen(app.get('port'), function(){
