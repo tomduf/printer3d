@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d1b156e1-7f77-4038-83d4-5bc221f2b2c4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+    <list default="true" id="d1b156e1-7f77-4038-83d4-5bc221f2b2c4" name="Default" comment="Erreur sur le numéro de ligne dans l'affichage des diapos&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="printer3d.iws" />
@@ -465,7 +464,11 @@
       <created>1392740517849</created>
       <updated>1392740517849</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Erreur sur le numéro de ligne dans l'affichage des diapos">
+      <created>1392742087094</created>
+      <updated>1392742087094</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -510,7 +513,8 @@
     <MESSAGE value="Arduino&#10;&#10;Intégration du cycle moteur&#10;" />
     <MESSAGE value="Nouvelle diapos (56 diapos)&#10;" />
     <MESSAGE value="Nettoyage du fichier Arduino&#10;Affichage sur trois lignes&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nettoyage du fichier Arduino&#10;Affichage sur trois lignes&#10;" />
+    <MESSAGE value="Erreur sur le numéro de ligne dans l'affichage des diapos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Erreur sur le numéro de ligne dans l'affichage des diapos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
