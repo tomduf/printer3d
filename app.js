@@ -128,7 +128,7 @@ function main() {
 						console.log("Cycle moteur terminé");
 						console.log("Plateau remonté pour la couche suivante");								
 					}
-					console.log("Affichage de la diapo " + req.params.num_diapo + "/" + fichiersDiapos.length);								
+					console.log("Affichage de la diapo " + (req.params.num_diapo + 1) + "/" + fichiersDiapos.length);
 					res.send(fichiersDiapos[req.params.num_diapo]);
                     
                 });
