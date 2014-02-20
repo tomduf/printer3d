@@ -118,7 +118,7 @@ function main() {
 							if (res != 8) return true;								
 						}))
 						{
-							if (count == 250){ // affichage temporisé des points
+							if (count == 500){ // affichage temporisé des points
 								process.stdout.write(".");
 								count = 0;
 							}
@@ -145,7 +145,7 @@ function main() {
                         if (res != 6) return true;
                     }))
                     {
-                        if (count == 250){ // affichage temporisé des points
+                        if (count == 500){ // affichage temporisé des points
                             process.stdout.write(".");
                             count = 0;
                         }
