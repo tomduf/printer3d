@@ -47,7 +47,9 @@ if ('development' == app.get('env')) {
 app.get('/users', user.list);
 
 // Message de bienvenue
-console.log('Serveur imprimante 3D - Lycée Condorcet');
+console.log('*******************************************');
+console.log('* Serveur imprimante 3D - Lycée Condorcet *');
+console.log('*******************************************');
 
 // Réception de données i2c Arduino
 wireArduino.on('data', function(data) {
@@ -66,22 +68,22 @@ function main() {
 	wireArduino.scan(function(err, tab_periphs_i2c) {
 	  // Scan des périphériques i2c
 	  if (!err){
-		  console.log("> " + tab_periphs_i2c.length + " périphériques i2c détectés :");
+		  console.log("* Détection de " + tab_periphs_i2c.length + " périphériques i2c :");
 		  tab_periphs_i2c.forEach(function(periph_i2c){
-			console.log("0x" + periph_i2c.toString(16)) ;
+			console.log("  > 0x" + periph_i2c.toString(16)) ;
 		 });
 	  }
 	});
 	
 	// Lecture d'un octet
 	wireArduino.readByte(function(err,res){
-		console.log("Etat du mode de l'Arduino: " + res.toString(16));
+		console.log("  > Mode de l'Arduino: " + res.toString(16));
 	});
 	
 	// Lecture du dossier des miniatures	
     fs.readdir(dossier_miniatures, function(err1, fichiersThumb) {
         if (err1) {
-            console.log("> les miniatures n'existent pas, création automatique en cours...");
+            console.log("* les miniatures n'existent pas, création automatique en cours...");
             // Création du dossier thumb-slices
             fs.mkdirSync(dossier_miniatures);
             // Création des vignettes si elle n'existent pas
@@ -91,7 +93,7 @@ function main() {
                 concurrency : 4,
                 width : 40
             }, function() {
-                console.log('> ...miniatures créées !');
+                console.log('  > ...miniatures créées !');
                 main(); // on rappelle la fonction principale pour rescanner le dossier des diapos
             });
         } else {
@@ -111,7 +113,7 @@ function main() {
 					if (req.params.num_diapo > 0){
 						// Lancement d'un cycle moteur
 						wireArduino.writeByte(0x09, function(err){});
-						process.stdout.write("Cycle moteur en cours...");
+						process.stdout.write("* Cycle moteur en cours...");
 						var count = 0;
                         // Tant que l'Arduino ne répond pas 8 (fin du cycle moteur)
 						while (wireArduino.readByte(function(err,res){
@@ -125,10 +127,10 @@ function main() {
 							count++;
 						}
 						console.log("");
-						console.log("Cycle moteur terminé");
-						console.log("Plateau remonté pour la couche suivante");								
+						console.log("  > Cycle moteur terminé");
+						console.log("  > Plateau prêt pour la couche suivante");
 					}
-					console.log("Affichage de la diapo " + (parseInt(req.params.num_diapo) + 1) + "/" + fichiersDiapos.length);
+					console.log("* Affichage de la diapo " + (parseInt(req.params.num_diapo) + 1) + "/" + fichiersDiapos.length);
                     // Envoi du mode en cours à l'Arduino
                     wireArduino.writeByte(0x03, function(err){});
 					res.send(fichiersDiapos[req.params.num_diapo]);
@@ -138,25 +140,25 @@ function main() {
                 app.get('/fin', function(req, res) {
                     // Lancement d'un cycle moteur
                     wireArduino.writeByte(0x07, function(err){});
-                    process.stdout.write("Impression terminée, remontée du  plateau en cours...");
+                    process.stdout.write("* Remontée du  plateau en cours...");
                     var count = 0;
                     // Tant que l'Arduino ne répond pas 6 (fin de la remontée du plateau)
                     while (wireArduino.readByte(function(err,res){
                         if (res != 6) return true;
                     }))
                     {
-                        if (count == 500){ // affichage temporisé des points
+                        if (count == 1000){ // affichage temporisé des points
                             process.stdout.write(".");
                             count = 0;
                         }
                         count++;
                     }
-                    res.send("Plateau remonté"); // Envoi au client
+                    res.send("  > Plateau remonté"); // Envoi au client
                     console.log("");
-                    console.log("> Plateau remonté. Impression terminée");
-                    console.log("> Interposer le miroir");
-                    console.log("> Retirer le bain de résine");
-                    console.log("> Insérer le bac de rinçage à température ambiante");
+                    console.log("  > Plateau remonté. Impression terminée");
+                    console.log("  > Interposer le miroir");
+                    console.log("  > Retirer le bain de résine");
+                    console.log("  > Insérer le bac de rinçage à température ambiante");
                 });
 
                 http.createServer(app).listen(app.get('port'), function(){
