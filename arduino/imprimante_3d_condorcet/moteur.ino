@@ -22,6 +22,7 @@ void cycle(){
 
 void remonteePlateau(){
     affichageTexte("Remontée","",numCouche,"Début");
+    delay(500);
     for (int i = 0; i < 5000 ; i++){
       myStepper.step(pas);        
     }

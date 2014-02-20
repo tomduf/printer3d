@@ -44,4 +44,9 @@ void affichageTexte(String text1, String text2, int text3, String text4){
   tft.setTextColor(RED);
   tft.setCursor(52,53);
   tft.print(text4);
+
+  Serial.println(mode);
+
 }
+
+

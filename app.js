@@ -149,6 +149,7 @@ function main() {
                         }
                         count++;
                     }
+                    res.send("Plateau remonté"); // Envoi au client
                     console.log("");
                     console.log("> Plateau remonté. Impression terminée");
                     console.log("> Interposer le miroir");

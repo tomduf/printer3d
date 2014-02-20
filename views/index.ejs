@@ -92,6 +92,11 @@
                                         }).delay(tempoCache).fadeIn(0).delay(tempoVisible).fadeOut(0).delay(tempoCache).fadeIn(0).delay(tempoVisible).fadeOut(0).delay(tempoCache).fadeIn(0).delay(tempoVisible).fadeOut(0, impression);
                                     });
                                 }
+                                else if (i == nbDiapos){ // Appel de la fin d'impression
+                                    $.get('/fin', function (textReponse) {
+                                        $("diapoActive").replaceWith('<h1>' + textReponse + '</h1>');
+                                    }
+                                }
                             });
                         }
                     });
