@@ -130,7 +130,7 @@ function main() {
 					}
 					console.log("Affichage de la diapo " + (parseInt(req.params.num_diapo) + 1) + "/" + fichiersDiapos.length);
                     // Envoi du mode en cours à l'Arduino
-                    wireArduino.writeByte(0x06, function(err){});
+                    wireArduino.writeByte(0x03, function(err){});
 					res.send(fichiersDiapos[req.params.num_diapo]);
 
                 });
