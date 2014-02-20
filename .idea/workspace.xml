@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1b156e1-7f77-4038-83d4-5bc221f2b2c4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arduino/imprimante_3d_condorcet/affichage.ino" afterPath="$PROJECT_DIR$/arduino/imprimante_3d_condorcet/affichage.ino" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arduino/imprimante_3d_condorcet/moteur.ino" afterPath="$PROJECT_DIR$/arduino/imprimante_3d_condorcet/moteur.ino" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="printer3d.iws" />
@@ -41,7 +38,7 @@
       <file leaf-file-name="index.ejs" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/index.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="93" selection-start="4412" selection-end="4412" vertical-scroll-proportion="0.65960664" vertical-offset="1004" max-vertical-offset="1740">
+            <state line="97" column="39" selection-start="4460" selection-end="4460" vertical-scroll-proportion="0.8184569" vertical-offset="914" max-vertical-offset="1740">
               <folding />
             </state>
           </provider>
@@ -875,7 +872,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="93" selection-start="4412" selection-end="4412" vertical-scroll-proportion="0.65960664" vertical-offset="1004" max-vertical-offset="1740">
+        <state line="97" column="39" selection-start="4460" selection-end="4460" vertical-scroll-proportion="0.8184569" vertical-offset="914" max-vertical-offset="1740">
           <folding />
         </state>
       </provider>
