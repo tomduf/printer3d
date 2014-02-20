@@ -54,7 +54,7 @@ void balayageModes(){
   case modePlateau :             // remontée du plateau
     if (pas != -1){
       vitesse = 100;
-      texteInfo = "Remontée du plateau";
+      texteInfo = "Remontée";
       changerTexte = true;
       pas = 1;
     }
@@ -62,14 +62,14 @@ void balayageModes(){
   case modeCycle :               // cycle moteur (bas -> haut - épaisseur couche)
     if (pas != -1){
       vitesse = 50;
-      texteInfo = "Cycle moteur";
+      texteInfo = "Cycle";
       changerTexte = true;
       pas = -1;
     }
     break;
   }
   if (changerTexte)
-    affichageTexte(texteInfo, "", "");
+    affichageTexte(texteInfo, "", "", "");
     changerTexte = false; 
 
     if (mode != modeStop && mode != modePlateau && mode != modeCycle){

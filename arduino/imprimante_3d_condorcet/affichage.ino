@@ -1,5 +1,5 @@
 // affichage du texte avec une grille
-void affichageTexte(String text1, String text2, String text3){
+void affichageTexte(String text1, String text2, String text3, String text4){
   // Fond bleu
   tft.fillScreen(BLUE);
   // Grille avec des lignes rapides
@@ -41,4 +41,7 @@ void affichageTexte(String text1, String text2, String text3){
   tft.setCursor(4,53);
   tft.print("Etat");
 
+  tft.setTextColor(BLACK);
+  tft.setCursor(52,37);
+  tft.print(text4);
 }

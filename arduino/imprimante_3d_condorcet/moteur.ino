@@ -1,16 +1,16 @@
 void cycle(){
-      affichageTexte("Cycle","","Down");
-      for (int i = 0; i < 1000 ; i++){
+      affichageTexte("Cycle","","","Down");
+      for (int i = 0; i < pasCycleDown ; i++){
         myStepper.step(pas);        
       }
 
       delay(500);
-      affichageTexte("Cycle","","Up");
+      affichageTexte("Cycle","","","Up");
       pas = 1;
-      for (int i = 0; i < 1000 - pasParCouche ; i++){ //  si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
+      for (int i = 0; i < pasCycleUp ; i++){ 
         myStepper.step(pas);        
       }
-      affichageTexte("Cycle","","OK");
+      affichageTexte("Cycle","","","Fin");
 
       delay(500);
       mode = 0;
@@ -18,13 +18,12 @@ void cycle(){
 }
 
 void remonteePlateau(){
-    affichageTexte("Remontée du plateau","Début","");
+    affichageTexte("Remontée","","","Début");
     for (int i = 0; i < 5000 ; i++){
       myStepper.step(pas);        
     }
     delay(500);
-    affichageTexte("Remontée du plateau","Fin","");
-    mode = modeStop;
+    affichageTexte("Remontée","","","Fin");
     Wire.write(messagefinRemontee); // Envoi de la fin de remontée du plateau au serveur
 }
 
