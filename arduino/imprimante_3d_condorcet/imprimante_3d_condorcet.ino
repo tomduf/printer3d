@@ -72,6 +72,7 @@ const float stepsPerRevolution = 200;
 // Caractéristiques mécaniques
 const float pasVis = 1; // mm
 const float epaisseurCouche = 0.1; // mm
+float hauteur = 0;
 
 int numCouche = 1;
 int nbCouches = 10;

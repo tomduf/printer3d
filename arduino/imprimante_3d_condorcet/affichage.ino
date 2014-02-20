@@ -27,7 +27,7 @@ void affichageTexte(String text1, String text2, int text3, String text4){
   tft.setTextColor(BLACK);
   tft.setCursor(52,21);
   tft.print(text2);
-  // Affichage ligne 3 (Couche)
+  // Affichage ligne 3 (Couche / nb couches)
   tft.setTextColor(BLACK);
   tft.setCursor(4,37);
   tft.print("Couche");
@@ -35,6 +35,12 @@ void affichageTexte(String text1, String text2, int text3, String text4){
   tft.setTextColor(RED);
   tft.setCursor(52,37);
   tft.print(text3);
+  
+  tft.setTextColor(BLACK);
+  tft.setCursor(75,37);
+  tft.print("/");
+  tft.setCursor(80,37);
+  tft.print(nbCouches);
   
   // Affichage ligne 4 (Etat)
   tft.setTextColor(BLACK);
