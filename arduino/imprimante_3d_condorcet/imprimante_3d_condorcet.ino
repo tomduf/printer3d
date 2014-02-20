@@ -28,6 +28,7 @@
 #define modeStop            0
 #define modeHaut            1
 #define modeBas             2
+#define modePrint           3
 #define modePlateau         7
 #define modeCycle           9
 
@@ -75,7 +76,7 @@ const float epaisseurCouche = 0.1; // mm
 const int pasCycleDown = 1000; // nombre de pas de descente par cycle
 const int pasParCouche = (int)(epaisseurCouche * stepsPerRevolution / pasVis);//  si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
 const int pasCycleUp = pasCycleDown - pasParCouche; // nombre de pas pour la remontée d'un cycle
-int numCouche = 0;
+int numCouche = 1;
 int nbCouches = 10;
 
 // Déclaration des ports pour le moteur
@@ -91,6 +92,7 @@ int bmpWidth, bmpHeight;
 uint8_t bmpDepth, bmpImageoffset;
 
 void setup() {
+  // initialisation du port série
   Serial.begin(9600);
   // initialisation de l'i2c comme esclave
   Wire.begin(SLAVE_ADDRESS);
@@ -109,13 +111,14 @@ void setup() {
   // intialisation de l'écran OLED
   tft.begin();
   tft.fillScreen(BLUE);
-  delay(500);
+  /*
   Serial.print("Initialisation de la carte SD...");
   if (!SD.begin(SD_CS)) {
     Serial.println("echec!");
     return;
   }
   Serial.println("SD OK!");
+  */
 }
 
 void loop() {

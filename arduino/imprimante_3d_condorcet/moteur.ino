@@ -1,6 +1,7 @@
 void cycle(){
       affichageTexte("Cycle","",numCouche,"Down");
-      for (int i = 0; i < pasCycleDown ; i++){
+      delay(500);
+     for (int i = 0; i < pasCycleDown ; i++){
         myStepper.step(pas);        
       }
 
@@ -14,7 +15,9 @@ void cycle(){
 
       numCouche++;
       Wire.write(messagefinCycle); // Envoi de la fin du cycle au serveur
+      mode = modeStop;
       delay(500);
+      
 }
 
 void remonteePlateau(){

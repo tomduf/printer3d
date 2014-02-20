@@ -51,6 +51,14 @@ void balayageModes(){
       pas = -1;
     }
     break;
+  case modePrint :                // impression
+    if (pas != 0){
+      vitesse = 100;
+      texteInfo = "Print";
+      changerTexte = true;
+      pas = 0;
+    }
+    break;
   case modePlateau :             // remontée du plateau
     if (pas != -1){
       vitesse = 100;
