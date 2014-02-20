@@ -94,7 +94,7 @@
                                 }
                                 else if (i == nbDiapos){ // Appel de la fin d'impression
                                     $.get('/fin', function (textReponse) {
-                                        $("diapoActive").replaceWith('<h1>' + textReponse + '</h1>');
+                                        $("#diapoActive").replaceWith('<h1>' + textReponse + '</h1>');
                                     });
                                 }
                             });
