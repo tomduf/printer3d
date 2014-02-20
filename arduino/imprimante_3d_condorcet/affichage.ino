@@ -1,5 +1,5 @@
 // affichage du texte avec une grille
-void affichageTexte(String text1, String text2, String text3, String text4){
+void affichageTexte(String text1, String text2, int text3, String text4){
   // Fond bleu
   tft.fillScreen(BLUE);
   // Grille avec des lignes rapides
@@ -19,18 +19,18 @@ void affichageTexte(String text1, String text2, String text3, String text4){
   tft.setCursor(52,5);
   tft.print(text1);
   
-  // Affichage ligne 2 (Couche)
+  // Affichage ligne 2 (Hauteur)
   tft.setTextColor(WHITE);
   tft.setCursor(4,21);
-  tft.print("Couche");
+  tft.print("Hauteur");
 
   tft.setTextColor(RED);
   tft.setCursor(52,21);
   tft.print(text2);
-  // Affichage ligne 3 (Hauteur)
+  // Affichage ligne 3 (Couche)
   tft.setTextColor(WHITE);
   tft.setCursor(4,37);
-  tft.print("Hauteur");
+  tft.print("Couche");
 
   tft.setTextColor(BLACK);
   tft.setCursor(52,37);

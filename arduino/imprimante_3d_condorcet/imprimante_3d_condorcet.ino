@@ -75,7 +75,8 @@ const float epaisseurCouche = 0.1; // mm
 const int pasCycleDown = 1000; // nombre de pas de descente par cycle
 const int pasParCouche = (int)(epaisseurCouche * stepsPerRevolution / pasVis);//  si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
 const int pasCycleUp = pasCycleDown - pasParCouche; // nombre de pas pour la remontée d'un cycle
-int couche = 0;
+int numCouche = 0;
+int nbCouches = 10;
 
 // Déclaration des ports pour le moteur
 // Initialisation de la bibliothèque (dans le tuto initial : broches 8 à 11, ici 2 à 6) :
@@ -91,10 +92,14 @@ uint8_t bmpDepth, bmpImageoffset;
 
 void setup() {
   Serial.begin(9600);
-  Wire.begin(SLAVE_ADDRESS);        // initialisation de l'i2c comme esclave
-  Wire.onReceive(receptionDonnees); // Déclencheur à la réception de données
-  Wire.onRequest(envoiMode);        // Déclencheur lors d'une requete du RPi
-  myStepper.setSpeed(vitesse);      // Initialisation de la vitesse
+  // initialisation de l'i2c comme esclave
+  Wire.begin(SLAVE_ADDRESS);
+  // Déclencheur à la réception de données
+  Wire.onReceive(receptionDonnees);
+  // Déclencheur lors d'une requete du RPi
+  Wire.onRequest(envoiMode);
+  // Initialisation de la vitesse du moteur
+  myStepper.setSpeed(vitesse);
   pinMode(cs, OUTPUT);
   digitalWrite(cs, HIGH);
   // intialisation des boutons

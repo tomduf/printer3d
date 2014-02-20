@@ -69,7 +69,7 @@ void balayageModes(){
     break;
   }
   if (changerTexte)
-    affichageTexte(texteInfo, "", "", "");
+    affichageTexte(texteInfo, "", numCouche, "");
     changerTexte = false; 
 
     if (mode != modeStop && mode != modePlateau && mode != modeCycle){
