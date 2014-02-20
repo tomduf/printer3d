@@ -1,6 +1,6 @@
 void cycle(){
       affichageTexte("Cycle","",numCouche,"Down");
-      delay(500);
+      delay(2000);
      for (int i = 0; i < pasCycleDown ; i++){
         myStepper.step(pas);        
       }

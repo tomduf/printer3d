@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1b156e1-7f77-4038-83d4-5bc221f2b2c4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arduino/imprimante_3d_condorcet/imprimante_3d_condorcet.ino" afterPath="$PROJECT_DIR$/arduino/imprimante_3d_condorcet/imprimante_3d_condorcet.ino" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arduino/imprimante_3d_condorcet/moteur.ino" afterPath="$PROJECT_DIR$/arduino/imprimante_3d_condorcet/moteur.ino" />
     </list>
     <ignored path="printer3d.iws" />
     <ignored path=".idea/workspace.xml" />

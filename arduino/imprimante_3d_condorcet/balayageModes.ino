@@ -2,7 +2,7 @@ void balayageModes(){
   // Appuis sur les boutons. Par sécurité, la pression doit etre maintenue
   etatBas=digitalRead(boutonBas);
   if (etatBas==LOW){   // si bouton bas appuyé
-     mode = 2;         // on descend
+     mode = modeBas;   // on descend
      appuiBas = true;  // et on se place en mode bouton appuyé
   }
   else if (appuiBas){ // si on n'appuie plus

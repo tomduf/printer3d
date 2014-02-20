@@ -73,11 +73,14 @@ const float stepsPerRevolution = 200;
 const float pasVis = 1; // mm
 const float epaisseurCouche = 0.1; // mm
 
+int numCouche = 1;
+int nbCouches = 10;
+
 const int pasCycleDown = 1000; // nombre de pas de descente par cycle
 const int pasParCouche = (int)(epaisseurCouche * stepsPerRevolution / pasVis);//  si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
 const int pasCycleUp = pasCycleDown - pasParCouche; // nombre de pas pour la remontée d'un cycle
-int numCouche = 1;
-int nbCouches = 10;
+const int pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution / pasVis); // on remonte de la valeur initiale plus 1 cm = 10mm
+
 
 // Déclaration des ports pour le moteur
 // Initialisation de la bibliothèque (dans le tuto initial : broches 8 à 11, ici 2 à 6) :
