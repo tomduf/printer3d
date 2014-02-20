@@ -80,7 +80,7 @@ void balayageModes(){
     affichageTexte(texteInfo, "", numCouche, "");
     changerTexte = false; 
 
-    if (mode != modeStop && mode != modePlateau && mode != modeCycle){
+    if (mode == modeHaut || mode == modeBas){
        myStepper.step(pas);
        envoiMode();
     }

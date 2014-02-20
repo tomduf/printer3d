@@ -129,8 +129,10 @@ function main() {
 						console.log("Plateau remonté pour la couche suivante");								
 					}
 					console.log("Affichage de la diapo " + (parseInt(req.params.num_diapo) + 1) + "/" + fichiersDiapos.length);
+                    // Envoi du mode en cours à l'Arduino
+                    wireArduino.writeByte(0x06, function(err){});
 					res.send(fichiersDiapos[req.params.num_diapo]);
-                    
+
                 });
                 // Appel de la fin d'impression
                 app.get('/fin', function(req, res) {
