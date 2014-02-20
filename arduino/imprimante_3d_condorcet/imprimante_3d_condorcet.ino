@@ -113,7 +113,7 @@ void setup() {
   pinMode(boutonHaut,INPUT);
   // intialisation de l'écran OLED
   tft.begin();
-  tft.fillScreen(BLUE);
+  tft.fillScreen(WHITE);
   /*
   Serial.print("Initialisation de la carte SD...");
   if (!SD.begin(SD_CS)) {
