@@ -33,6 +33,7 @@ void balayageModes(){
       texteInfo = "Stop";
       changerTexte = true;
       pas = 0;
+      etatDiapo=0;
     }
     break;
   case modeHaut :                // up
@@ -41,6 +42,7 @@ void balayageModes(){
       texteInfo = "Haut";
       changerTexte = true;
       pas = 1;
+      etatDiapo = 0;
     }
     break;
   case modeBas :                 // down
@@ -49,6 +51,7 @@ void balayageModes(){
       texteInfo = "Bas";
       changerTexte = true;
       pas = -1;
+      etatDiapo = 0;
     }
     break;
   case modePrint :                // impression
@@ -56,11 +59,20 @@ void balayageModes(){
       texteInfo = "Print";
       changerTexte = true;
       pas = 0;
+      if (etatDiapo == 3 )
+        etatDiapo = 0;
+    break;
+  case modeEtatDiapo :             // affichage
+      vitesse = 100;
+      texteInfo = "Print";
+      changerTexte = true;
+      pas = 0;
+      etatDiapo++;
     break;
   case modePlateau :             // remontée du plateau
     if (pas != -1){
       vitesse = 100;
-      texteInfo = "Remontée";
+      texteInfo = "Montee";
       changerTexte = true;
       pas = 1;
     }
@@ -71,6 +83,7 @@ void balayageModes(){
       texteInfo = "Cycle";
       changerTexte = true;
       pas = -1;
+      etatDiapo=0;
     }
     break;
   }

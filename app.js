@@ -136,6 +136,11 @@ function main() {
 					res.send(fichiersDiapos[req.params.num_diapo]);
 
                 });
+                // Appel de l'état d'affichage des diapos
+                app.get('/etat', function(req, res){
+                    // Affichage de la pastille verte à chaque diapo
+                    wireArduino.writeByte(0x04, function(err){});
+                });
                 // Appel de la fin d'impression
                 app.get('/fin', function(req, res) {
                     // Lancement d'un cycle moteur

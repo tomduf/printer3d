@@ -29,6 +29,7 @@
 #define modeHaut            1
 #define modeBas             2
 #define modePrint           3
+#define modeEtatDiapo       4
 #define modePlateau         7
 #define modeCycle           9
 
@@ -76,6 +77,7 @@ float hauteur = 0;
 
 int numCouche = 1;
 int nbCouches = 10;
+int etatDiapo = 0;
 
 const int pasCycleDown = 1000; // nombre de pas de descente par cycle
 const int pasParCouche = (int)(epaisseurCouche * stepsPerRevolution / pasVis);//  si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
