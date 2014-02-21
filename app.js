@@ -140,6 +140,7 @@ function main() {
                 app.get('/etat', function(req, res){
                     // Affichage de la pastille verte à chaque diapo
                     wireArduino.writeByte(0x04, function(err){});
+                    res.send("ok"); // Envoi au client
                 });
                 // Appel de la fin d'impression
                 app.get('/fin', function(req, res) {

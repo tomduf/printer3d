@@ -87,7 +87,9 @@
                             $('#mire').fadeOut(2000, function impression() {// fonction récursive qui épuise toutes les images disponibles
                                 function etatDiapo(){
                                     // Affichage de la pastille verte à chaque diapo
-                                    wireArduino.writeByte(0x04, function(err){});
+                                    $.get('etat', function(textReponse){
+                                        console.log("- appel serveur pour état de la diapo : " + textReponse);
+                                    });
                                 }
                                 if (cycleDemarre && i < nbDiapos) {
                                     $.get('/diapo/' + i++, function (diapoActive) {
