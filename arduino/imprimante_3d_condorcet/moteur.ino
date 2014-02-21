@@ -1,12 +1,12 @@
 void cycle(){
       affichageTexte("Cycle","",numCouche,"Down");
-      delay(2000);
+      delay(1000);
      for (int i = 0; i < pasCycleDown ; i++){
         myStepper.step(pas);        
       }
 
-      delay(500);
       affichageTexte("Cycle","",numCouche,"Up");
+      delay(1000);
       pas = 1;
       for (int i = 0; i < pasCycleUp ; i++){ 
         myStepper.step(pas);        
