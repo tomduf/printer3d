@@ -61,6 +61,7 @@
 </script>
 
 <script>
+
     $(document).ready(function () {
         var tempoVisible = 3000;
         var tempoCache = 1000;
@@ -68,10 +69,6 @@
         var imageActive = $("#diapoActive");
         var i = 0;
         var nbDiapos = <%=diaposFichiers.length%>;
-        // Gestion des événements sur les diapos pour l'affichage de l'état sur Arduino
-        imageActive.on('fadeIn',function(){
-            get('/etat');
-        });
         // déclaration de la mire comme image active (elle doit être la première image dans le HTML)
         $("#boutonMire").click(function () {// si appui sur le bouton
             $('body').mouseover(function () {// il est important de chacher le curseur pour qu'il ne polymérise pas la résine...
@@ -88,12 +85,16 @@
                         if (e.which == 13) {// si appui sur ENTER
                             cycleDemarre = true;
                             $('#mire').fadeOut(2000, function impression() {// fonction récursive qui épuise toutes les images disponibles
+                                function etatDiapo(){
+                                    // Affichage de la pastille verte à chaque diapo
+                                    wireArduino.writeByte(0x04, function(err){});
+                                }
                                 if (cycleDemarre && i < nbDiapos) {
                                     $.get('/diapo/' + i++, function (diapoActive) {
                                         console.log("> diapositive active n°" + i + "/" + nbDiapos + " : " + diapoActive);
                                         imageActive.attr({
                                             src: '/slices/' + diapoActive
-                                        }).delay(tempoCache).fadeIn(0).delay(tempoVisible).fadeOut(0).delay(tempoCache).fadeIn(0).delay(tempoVisible).fadeOut(0).delay(tempoCache).fadeIn(0).delay(tempoVisible).fadeOut(0, impression);
+                                        }).delay(tempoCache).fadeIn(0,etatDiapo).delay(tempoVisible).fadeOut(0).delay(tempoCache).fadeIn(0,etatDiapo).delay(tempoVisible).fadeOut(0).delay(tempoCache).fadeIn(0,etatDiapo).delay(tempoVisible).fadeOut(0, impression);
                                     });
                                 }
                                 else if (i == nbDiapos){ // Appel de la fin d'impression
