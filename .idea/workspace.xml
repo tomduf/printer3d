@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1b156e1-7f77-4038-83d4-5bc221f2b2c4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arduino/imprimante_3d_condorcet/affichage.ino" afterPath="$PROJECT_DIR$/arduino/imprimante_3d_condorcet/affichage.ino" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arduino/imprimante_3d_condorcet/balayageModes.ino" afterPath="$PROJECT_DIR$/arduino/imprimante_3d_condorcet/balayageModes.ino" />
     </list>
     <ignored path="printer3d.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,7 +38,7 @@
       <file leaf-file-name="index.ejs" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="62" selection-start="3715" selection-end="3715" vertical-scroll-proportion="-15.666667" vertical-offset="974" max-vertical-offset="1845">
+            <state line="87" column="53" selection-start="3494" selection-end="3494" vertical-scroll-proportion="-14.416667" vertical-offset="959" max-vertical-offset="1845">
               <folding />
             </state>
           </provider>
@@ -865,7 +865,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="62" selection-start="3715" selection-end="3715" vertical-scroll-proportion="-15.666667" vertical-offset="974" max-vertical-offset="1845">
+        <state line="87" column="53" selection-start="3494" selection-end="3494" vertical-scroll-proportion="-14.416667" vertical-offset="959" max-vertical-offset="1845">
           <folding />
         </state>
       </provider>

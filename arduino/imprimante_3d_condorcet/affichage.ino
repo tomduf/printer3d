@@ -52,11 +52,11 @@ void affichageTexte(String text1, String text2, int text3, String text4){
   tft.print(text4);
   
   if (etatDiapo > 0)
-    tft.fillCircle(52, 53, 5, GREEN);
+    tft.fillCircle(55, 56, 5, GREEN);
   if (etatDiapo > 1)
-    tft.fillCircle(66, 53, 5, GREEN);
+    tft.fillCircle(69, 56, 5, GREEN);
   if (etatDiapo > 2)
-    tft.fillCircle(80, 53, 5, GREEN);
+    tft.fillCircle(83, 56, 5, GREEN);
 
   Serial.println(mode);
 

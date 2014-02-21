@@ -75,6 +75,7 @@ void balayageModes(){
       texteInfo = "Montee";
       changerTexte = true;
       pas = 1;
+      etatDiapo = 0;
     }
     break;
   case modeCycle :               // cycle moteur (bas -> haut - épaisseur couche)
