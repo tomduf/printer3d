@@ -69,7 +69,7 @@
         var i = 0;
         var nbDiapos = <%=diaposFichiers.length%>;
         // Gestion des événements sur les diapos pour l'affichage de l'état sur Arduino
-        imageActive.on('fadein',function(){
+        imageActive.on('fadeIn',function(){
             get('/etat');
         });
         // déclaration de la mire comme image active (elle doit être la première image dans le HTML)
