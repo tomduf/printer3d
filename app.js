@@ -11,6 +11,7 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var i2c = require('i2c');
+var clc = require('cli-color');
 
 // Adresse de l'Arduino
 var arduino = 0x05;

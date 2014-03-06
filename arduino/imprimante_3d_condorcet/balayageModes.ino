@@ -1,5 +1,9 @@
 void balayageModes(){
   // Appuis sur les boutons. Par sécurité, la pression doit etre maintenue
+  etatStop=digitalRead(boutonStop); // bouton prioritaire sur tout
+  if (etatStop==LOW){
+     mode = modeStop;
+  }
   etatBas=digitalRead(boutonBas);
   if (etatBas==LOW){   // si bouton bas appuyé
      mode = modeBas;   // on descend
@@ -8,11 +12,6 @@ void balayageModes(){
   else if (appuiBas){ // si on n'appuie plus
     mode = modeStop;          // alors on stoppe
     appuiBas = false;  // et on remet le mode à 0
-  }
-    
-  etatStop=digitalRead(boutonStop); // bouton prioritaire sur tout
-  if (etatStop==LOW){
-     mode = modeStop;
   }
 
   etatHaut=digitalRead(boutonHaut);
