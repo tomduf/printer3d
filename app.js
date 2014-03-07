@@ -12,6 +12,7 @@ var http = require('http');
 var path = require('path');
 var i2c = require('i2c');
 var clc = require('cli-color');
+var RaspiCam = require("raspicam");
 
 // Adresse de l'Arduino
 var arduino = 0x05;
@@ -25,6 +26,11 @@ var wireAccel = new i2c(accel, {device: '/dev/i2c-1'});
 var app = express();
 var dossier_diapos = path.join(__dirname, 'public/slices');
 var dossier_miniatures = path.join(__dirname, 'public/thumb-slices');
+var camera = new RaspiCam({
+    mode : "photo",
+    output : "./public/images/photo.jpg"
+});
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -60,6 +66,8 @@ wireArduino.on('data', function(data) {
    }
 });
 
+// Caméra en arrière plan (une photo régulièrement, pas de flux)
+camera.start();
 
 // Démarrage
 main();
