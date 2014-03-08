@@ -18,8 +18,8 @@ var RaspiCam = require("raspicam");
 var camera = new RaspiCam({
     mode : "photo",
     output : "./public/images/photo.jpg",
-    width : 640,
-    height : 480,
+    width : 400,
+    height : 300,
     rotation : 180
 });
 
