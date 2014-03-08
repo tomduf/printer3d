@@ -14,6 +14,15 @@ var i2c = require('i2c');
 var clc = require('cli-color');
 var RaspiCam = require("raspicam");
 
+// Configuration de la caméra
+var camera = new RaspiCam({
+    mode : "photo",
+    output : "./public/images/photo.jpg",
+    width : 640,
+    height : 480
+});
+
+
 // Adresse de l'Arduino
 var arduino = 0x05;
 var accel = 0x44;
@@ -26,11 +35,6 @@ var wireAccel = new i2c(accel, {device: '/dev/i2c-1'});
 var app = express();
 var dossier_diapos = path.join(__dirname, 'public/slices');
 var dossier_miniatures = path.join(__dirname, 'public/thumb-slices');
-var camera = new RaspiCam({
-    mode : "photo",
-    output : "./public/images/photo.jpg"
-});
-
 
 // all environments
 app.set('port', process.env.PORT || 3000);
