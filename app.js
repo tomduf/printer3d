@@ -19,7 +19,8 @@ var camera = new RaspiCam({
     mode : "photo",
     output : "./public/images/photo.jpg",
     width : 640,
-    height : 480
+    height : 480,
+    rotation : 180
 });
 
 
