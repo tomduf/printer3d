@@ -1,6 +1,6 @@
 // affichage du texte avec une grille
 void affichageTexte(String text1, String text2, int text3, String text4){
-  // Fond bleu
+  // Fond blanc
   tft.fillScreen(WHITE);
   // Grille avec des lignes rapides
   // Trois lignes horizontales
