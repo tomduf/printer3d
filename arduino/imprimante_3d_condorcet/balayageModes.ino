@@ -6,12 +6,12 @@ void balayageModes(){
   }
   etatBas=digitalRead(boutonBas);
   if (etatBas==LOW){   // si bouton bas appuyé
-     mode = modeBas;   // on descend
-     appuiBas = true;  // et on se place en mode bouton appuyé
+     mode = modeBas;   // on se place en mode "descente"
+     appuiBas = true;  // et en mode "bouton appuyé"
   }
-  else if (appuiBas){ // si on n'appuie plus
-    mode = modeStop;          // alors on stoppe
-    appuiBas = false;  // et on remet le mode à 0
+  else if (appuiBas){  // si on n'appuie plus alros qu'on était en mode "bouton appuyé"
+    mode = modeStop;   // alors on se place en mode "stop"
+    appuiBas = false;  // et on remet le mode à "bouton relevé"
   }
 
   etatHaut=digitalRead(boutonHaut);

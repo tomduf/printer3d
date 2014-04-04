@@ -2,29 +2,29 @@
  Programme utilisé en combinaison avec le Raspberry Pi
  */
 
-#include <Wire.h>
-#include <Stepper.h>
-#include <SD.h>
-#include <SPI.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1331.h>
+#include <Wire.h>              // Gestion de l'i2c
+#include <Stepper.h>           // Gestion du moteur PAP
+#include <SD.h>                // Gestion de la carte SD de l'écran
+#include <SPI.h>               // Gestion du SPI
+#include <Adafruit_GFX.h>      // Bibli Adafruit d'affichage sur l'écran Oled
+#include <Adafruit_SSD1331.h>  // Gestion de l'écran Oled
 
-// Liaison i2c sur le port 5
-#define SLAVE_ADDRESS 0x05
+// liaison i2c sur le port 5 avec l'Arduino
+#define ARDUINO_ADDRESS 0x05
 
-// initialisation des broches pour l'écran (avec SPI)
+// déclaration des broches pour l'écran (avec SPI)
 #define sclk                13
 #define mosi                11
 #define cs                  10
 #define rst                 9
 #define dc                  8
 
-// boutons
+// déclaration des boutons de commande manuelle du moteur
 #define boutonBas           7
 #define boutonStop          1
 #define boutonHaut          0
 
-// Modes
+// déclaration des modes de fonctionnement de l'imprimante
 #define modeStop            0
 #define modeHaut            1
 #define modeBas             2
@@ -33,19 +33,19 @@
 #define modePlateau         7
 #define modeCycle           9
 
-// Messages
+// définition des valeurs de messages entre le RPi et l'Arduino
 #define messageStop         0
 #define messagefinRemontee  6
 #define messagefinCycle     8
 
-// Pour Arduino Uno/Duemilanove, etc
+// pour Arduino Uno/Duemilanove, etc
 // connecter la carte SD avec MOSI sur la broche 11,
 // MISO sur la broche 12
 // SCK sur la broche 13 (standard)
 // ensuite la broche 4 va vers CS (or whatever you have set up)
 #define SD_CS 4    // Set the chip select line to whatever you use (4 doesnt conflict with the library)
 
-// Définition des couleurs
+// définition des couleurs
 #define	BLACK           0x0000
 #define	BLUE            0x001F
 #define	RED             0xF800
@@ -57,8 +57,9 @@
 
 #define BUFFPIXEL       20
 
-// pour afficher les images de la carte SD
-Adafruit_SSD1331 tft = Adafruit_SSD1331(cs, dc, rst);  
+// déclaration de l'écran tft pour afficher les images de la carte SD
+Adafruit_SSD1331 tft = Adafruit_SSD1331(cs, dc, rst); 
+
 // Déclaration des variables
 int vitesse =           100;
 int mode =              0;
@@ -68,9 +69,11 @@ int etatBas, etatStop, etatHaut;
 String texteInfo; 
 boolean changerTexte = false;
 boolean appuiHaut, appuiBas, appuiStop;
+
 // nombre de pas du moteur 42BYG304
 const float stepsPerRevolution = 200;
-// Caractéristiques mécaniques
+
+// caractéristiques mécaniques
 const float pasVis = 1; // mm
 const float epaisseurCouche = 0.1; // mm
 float hauteur = 0;
@@ -79,10 +82,14 @@ int numCouche = 1;
 int nbCouches = 10;
 int etatDiapo = 0;
 
-const int pasCycleDown = 1000; // nombre de pas de descente par cycle
-const int pasParCouche = (int)(epaisseurCouche * stepsPerRevolution / pasVis);//  si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
-const int pasCycleUp = pasCycleDown - pasParCouche; // nombre de pas pour la remontée d'un cycle
-const int pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution / pasVis); // on remonte de la valeur initiale plus 1 cm = 10mm
+// nombre de pas de descente par cycle
+const int pasCycleDown = 1000;
+// si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
+const int pasParCouche = (int)(epaisseurCouche * stepsPerRevolution / pasVis);
+// nombre de pas pour la remontée d'un cycle
+const int pasCycleUp = pasCycleDown - pasParCouche;
+// on remonte de la valeur initiale plus 1 cm = 10mm
+const int pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution / pasVis); 
 
 
 // Déclaration des ports pour le moteur
@@ -101,7 +108,7 @@ void setup() {
   // initialisation du port série
   Serial.begin(9600);
   // initialisation de l'i2c comme esclave
-  Wire.begin(SLAVE_ADDRESS);
+  Wire.begin(ARDUINO_ADDRESS);
   // Déclencheur à la réception de données
   Wire.onReceive(receptionDonnees);
   // Déclencheur lors d'une requete du RPi
@@ -111,24 +118,26 @@ void setup() {
   pinMode(cs, OUTPUT);
   digitalWrite(cs, HIGH);
   // intialisation des boutons
-  pinMode(boutonBas,INPUT);
-  pinMode(boutonStop,INPUT);
-  pinMode(boutonHaut,INPUT);
+  pinMode(boutonBas, INPUT);
+  pinMode(boutonStop, INPUT);
+  pinMode(boutonHaut, INPUT);
   // intialisation de l'écran OLED
   tft.begin();
-  tft.fillScreen(WHITE);
+  // Affichage de la grille sans les valeurs
+  affichageGrille();
   /*
   Serial.print("Initialisation de la carte SD...");
-  if (!SD.begin(SD_CS)) {
-    Serial.println("echec!");
-    return;
-  }
-  Serial.println("SD OK!");
-  */
+   if (!SD.begin(SD_CS)) {
+   Serial.println("echec!");
+   return;
+   }
+   Serial.println("SD OK!");
+   */
 }
 
 void loop() {
   balayageModes();
 }
+
 
 
