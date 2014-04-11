@@ -22,7 +22,7 @@ void affichageGrille(){
   // Affichage ligne 3 (Couche / nb couches)
   tft.setCursor(4,37);
   tft.print("Couche");
-  tft.setCursor(75,37);
+  tft.setCursor(72,37);
   tft.print("/");
 
   // Affichage ligne 4 (Etat)
@@ -35,30 +35,37 @@ void affichageGrille(){
 void affichageTexte(String text1, String text2, int text3, String text4){
   // Affichage du mode
   tft.setTextColor(BLUE);
+  tft.fillRect(52, 5, 30, 10, WHITE);
   tft.setCursor(52,5);
   tft.print(text1);
   
   // Affichage de la hauteur
   tft.setTextColor(BLACK);
+  tft.fillRect(52, 21, 30, 10, WHITE);
   tft.setCursor(52,21);
   tft.print(text2);
 
-  // Affichage de la couche actibe / nb couches
+  // Affichage de la couche active / nb couches
   tft.setTextColor(RED);
+  tft.fillRect(52, 37, 15, 10, WHITE);
   tft.setCursor(52,37);
   tft.print(text3);
   
   tft.setTextColor(BLACK);
-  tft.setCursor(80,37);
+  tft.setCursor(78,37);
   tft.print(nbCouches);
   
   // Affichage de l'état
   tft.setTextColor(GREEN);
+  if (etatDiapo == 0 )
+    tft.fillRect(52, 53, 30, 10, WHITE);
   tft.setCursor(52,53);
   tft.print(text4);
   
-  if (etatDiapo > 0)
+  if (etatDiapo > 0){
+    tft.fillRect(52, 53, 30, 10, WHITE);
     tft.fillCircle(58, 56, 5, GREEN);
+  }
   if (etatDiapo > 1)
     tft.fillCircle(72, 56, 5, GREEN);
   if (etatDiapo > 2)

@@ -24,13 +24,15 @@ void balayageModes(){
     appuiHaut = false;
   }
   
-  // Balaye le mode (modifié par les boutons ou par le Raspberry
+  // Balaye le mode (modifié par les boutons ou par le Raspberry)
   switch (mode){
   case modeStop :                // stop
     if (pas != 0){
       vitesse = 100;
-      texteInfo = "Stop";
-      changerTexte = true;
+      if (texteInfo != "Stop"){
+        texteInfo = "Stop";
+        changerTexte = true;
+      }
       pas = 0;
       etatDiapo=0;
     }
@@ -38,8 +40,10 @@ void balayageModes(){
   case modeHaut :                // up
     if (pas != 1){
       vitesse = 100;
-      texteInfo = "Haut";
-      changerTexte = true;
+      if (texteInfo != "Haut"){
+        texteInfo = "Haut";
+        changerTexte = true;
+      }
       pas = 1;
       etatDiapo = 0;
     }
@@ -47,16 +51,20 @@ void balayageModes(){
   case modeBas :                 // down
     if (pas != -1){
       vitesse = 100;
-      texteInfo = "Bas";
-      changerTexte = true;
+      if (texteInfo != "Bas"){
+        texteInfo = "Bas";
+        changerTexte = true;
+      }
       pas = -1;
       etatDiapo = 0;
     }
     break;
   case modePrint :                // impression
       vitesse = 100;
-      texteInfo = "Print";
-      changerTexte = true;
+      if (texteInfo != "Print"){
+        texteInfo = "Print";
+        changerTexte = true;
+      }
       pas = 0;
       if (etatDiapo == 3 )
         etatDiapo = 0;
@@ -71,8 +79,10 @@ void balayageModes(){
   case modePlateau :             // remontée du plateau
     if (pas != -1){
       vitesse = 100;
-      texteInfo = "Montee";
-      changerTexte = true;
+      if (texteInfo != "Montee"){
+        texteInfo = "Montee";
+        changerTexte = true;
+      }
       pas = 1;
       etatDiapo = 0;
     }
@@ -80,8 +90,10 @@ void balayageModes(){
   case modeCycle :               // cycle moteur (bas -> haut - épaisseur couche)
     if (pas != -1){
       vitesse = 50;
-      texteInfo = "Cycle";
-      changerTexte = true;
+      if (texteInfo != "Cycle"){
+        texteInfo = "Cycle";
+        changerTexte = true;
+      }
       pas = -1;
       etatDiapo=0;
     }
