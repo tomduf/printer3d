@@ -1,29 +1,4 @@
-void balayageModes(){
-  // Appuis sur les boutons. Par sécurité, la pression doit etre maintenue
-  etatStop=digitalRead(boutonStop); // bouton prioritaire sur tout
-  if (etatStop==LOW){
-     mode = modeStop;
-  }
-  etatBas=digitalRead(boutonBas);
-  if (etatBas==LOW){   // si bouton bas appuyé
-     mode = modeBas;   // on se place en mode "descente"
-     appuiBas = true;  // et en mode "bouton appuyé"
-  }
-  else if (appuiBas){  // si on n'appuie plus alros qu'on était en mode "bouton appuyé"
-    mode = modeStop;   // alors on se place en mode "stop"
-    appuiBas = false;  // et on remet le mode à "bouton relevé"
-  }
-
-  etatHaut=digitalRead(boutonHaut);
-  if (etatHaut==LOW){
-     mode = modeHaut;
-     appuiHaut = true;
-  }
-  else if (appuiHaut){
-    mode = modeStop;
-    appuiHaut = false;
-  }
-  
+void balayageModes(){  
   // Balaye le mode (modifié par les boutons ou par le Raspberry)
   switch (mode){
   case modeStop :                // stop
@@ -60,21 +35,21 @@ void balayageModes(){
     }
     break;
   case modePrint :                // impression
-      vitesse = 100;
-      if (texteInfo != "Print"){
-        texteInfo = "Print";
-        changerTexte = true;
-      }
-      pas = 0;
-      if (etatDiapo == 3 )
-        etatDiapo = 0;
-    break;
-  case modeEtatDiapo :             // affichage
-      vitesse = 100;
+    vitesse = 100;
+    if (texteInfo != "Print"){
       texteInfo = "Print";
       changerTexte = true;
-      pas = 0;
-      etatDiapo++;
+    }
+    pas = 0;
+    if (etatDiapo == 3 )
+      etatDiapo = 0;
+    break;
+  case modeEtatDiapo :             // affichage
+    vitesse = 100;
+    texteInfo = "Print";
+    changerTexte = true;
+    pas = 0;
+    etatDiapo++;
     break;
   case modePlateau :             // remontée du plateau
     if (pas != -1){
@@ -101,15 +76,16 @@ void balayageModes(){
   }
   if (changerTexte)
     affichageTexte(texteInfo, "", numCouche, "");
-    changerTexte = false; 
+  changerTexte = false; 
 
-    if (mode == modeHaut || mode == modeBas){
-       myStepper.step(pas);
-       envoiMode();
-    }
-    else if (mode == modeCycle)    // cycle moteur (bas -> haut - épaisseur couche)
-      cycle();
-      
-    else if (mode == modePlateau)  // cycle de remontée du plateau
+  if (mode == modeHaut || mode == modeBas){
+    myStepper.step(pas);
+    envoiMode();
+  }
+  else if (mode == modeCycle)    // cycle moteur (bas -> haut - épaisseur couche)
+    cycle();
+
+  else if (mode == modePlateau)  // cycle de remontée du plateau
       remonteePlateau();
 }
+

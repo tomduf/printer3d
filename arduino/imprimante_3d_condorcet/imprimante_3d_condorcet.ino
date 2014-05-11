@@ -136,6 +136,32 @@ void setup() {
 }
 
 void loop() {
+  // Appuis sur les boutons. Par sécurité, la pression doit etre maintenue
+  etatStop=digitalRead(boutonStop); // bouton prioritaire sur tout
+  if (etatStop==LOW){
+     mode = modeStop;
+  }
+  etatBas=digitalRead(boutonBas);
+  if (etatBas==LOW){   // si bouton bas appuyé
+     mode = modeBas;   // on se place en mode "descente"
+     appuiBas = true;  // et en mode "bouton appuyé"
+  }
+  else if (appuiBas){  // si on n'appuie plus alros qu'on était en mode "bouton appuyé"
+    mode = modeStop;   // alors on se place en mode "stop"
+    appuiBas = false;  // et on remet le mode à "bouton relevé"
+  }
+
+  etatHaut=digitalRead(boutonHaut);
+  if (etatHaut==LOW){
+     mode = modeHaut;
+     appuiHaut = true;
+  }
+  else if (appuiHaut){
+    mode = modeStop;
+    appuiHaut = false;
+  }
+  
+  // Appel au balayage de tous les modes
   balayageModes();
 }
 
