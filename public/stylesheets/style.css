@@ -21,5 +21,5 @@ a {
     /* Calcul : (1280 - L)/2 */
     margin-left:440px ;
     /* Calcul : (720 - H)/2 mais il vaut mieux recentrer vers le haut*/
-    margin-top:50px;
+    margin-top:0px;
 }
