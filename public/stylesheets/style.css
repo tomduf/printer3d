@@ -20,6 +20,6 @@ a {
     display: none;
     /* Calcul : (1280 - L)/2 */
     margin-left:440px ;
-    /* Calcul : (720 - H)/2 */
-    margin-top:160px;
+    /* Calcul : (720 - H)/2 mais il vaut mieux recentrer vers le haut*/
+    margin-top:50px;
 }
