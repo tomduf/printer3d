@@ -18,4 +18,8 @@ a {
 
 #diapoActive {
     display: none;
+    /* Calcul : (1280 - L)/2 */
+    margin-left:440px ;
+    /* Calcul : (720 - H)/2 */
+    margin-top:160px;
 }
