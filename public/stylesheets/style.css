@@ -9,7 +9,8 @@ a {
 }
 
 #mire {
-    padding: -50px;
+    display: block;
+    margin: -50px;
     display: none;
 }
 
