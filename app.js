@@ -16,7 +16,7 @@ var RaspiCam = require("raspicam");
 
 // Configuration de la caméra
 var camera = new RaspiCam({
-    mode : "timelapse",
+    mode : "photo",
     output : "./public/images/photo.jpg",
     width : 400,
     height : 300,
@@ -75,13 +75,16 @@ wireArduino.on('data', function(data) {
 // Caméra en arrière plan (une photo régulièrement, pas de flux)
 camera.start();
 
-//Déclencheur à la sauvegarde d'une image
+//Déclencheur à la sauvegarde d'une image et lancement du programme principal
 camera.on("read", function(err, filename){
     console.log("  > Sauvegade d'une photo : " + filename);
+    // Arrêt de la caméra
+    camera.stop();
+    // Démarrage du programme principal
+    main();
+
 });
 
-// Démarrage
-main();
 
 // Récupération des vignettes des diapos par lecture du dossier
 function main() {
