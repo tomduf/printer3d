@@ -1,0 +1,714 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Imprimante 3D - Lycée Condorcet / Montreuil</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<div id="instructions">
+    <header>
+        <img src="/images/photo.jpg" width="400" height="300" style="float:right"/>
+        <h1>Imprimante 3D</h1>
+        <h2>Lycée Condorcet - Montreuil</h2>
+    </header>
+    <div id="main" role="main">
+        <ol>
+            <li>
+                Vérifier que les vignettes ci-dessous correspondent bien aux diapositives à projeter. Elle doivent être déposées dans le dossier <strong>slices</strong> avec un classement
+                alphabétique.
+            </li>
+            <li>
+                Prendre les références de l'axe z.
+            </li>
+            <li>
+                Vérifier la quantité de résine.
+            </li>
+            <li>
+                Préparer le kit de nettoyage à température ambiante.
+            </li>
+            <li>Modifier si nécessaire les valeurs d'impression ci-dessous.</li>
+        </ol>
+        <form id="formArduino" name="formArduino" method="post">
+            <ul>
+                <li>
+                    <label for="epCouches">Épaisseur des couches:</label>
+                    <input name="epCouches" type="text" id="epCouches" value="0.1" size="4" maxlength="4">
+                    mm
+                </li>
+                <li>
+                    <label for="nbExpCouche">Nombre d'expositions par couche:</label>
+                    <input name="nbExpCouche" type="text" id="nbExpCouche" value="3" size="3" maxlength="3">
+                </li>
+                <li>
+                    <label for="intervalleEntreExp">Intervalle entre chaque exposition:</label>
+                    <input name="intervalleEntreExp" type="text" id="intervalleEntreExp" value="1" size="3" maxlength="3">
+                    s</li>
+                <li>
+                    <label for="profPlongee">Profondeur de plongée avant la couche suivante:</label>
+                    <input name="profPlongee" type="text" id="profPlongee" value="5" size="3" maxlength="3">
+                    mm</li>
+                <li>
+                    <label for="tempsArretAvantCoucheSuivante">Temps d'arrêt avant remontée vers la couche suivante:</label>
+                    <input name="tempsArretAvantCoucheSuivante" type="text" id="tempsArretAvantCoucheSuivante" value="1" size="3" maxlength="3">
+                    s</li>
+                <li>
+                    <label for="tempsPauseAvantExpo">Temps de pause entre la remontée et la première exposition:</label>
+                    <input name="tempsPauseAvantExpo" type="text" id="tempsPauseAvantExpo" value="0.1" size="3" maxlength="3">
+                    s</li></ul>
+            <p>
+                <input type="submit" name="submit" id="submit" value="Mettre à jour l'Arduino">
+            </p>
+        </form>
+        <ol start="6">
+            <li>Cliquer sur le bouton ci-dessous une première fois pour afficher la mise au point puis appuyer sur Entrée pour lancer
+                l'impression. </li>
+        </ol>
+    </div>
+    <footer>
+        <p>
+            <input type="button" value="Afficher la mire" id="boutonMire"/>
+        </p>
+        <p>
+            282 diapositives préchargées
+        </p>
+    </footer>
+</div>
+<div id="images">
+<!-- Oouverture de toutes les vignettes -->
+<img src="/images/mire_mise_au_point.png" id="mire"/>
+
+
+<img src="/thumb-slices/layer_0001(z=0.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0002(z=0.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0003(z=0.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0004(z=0.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0005(z=1.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0006(z=1.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0007(z=1.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0008(z=1.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0009(z=1.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0010(z=2.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0011(z=2.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0012(z=2.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0013(z=2.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0014(z=2.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0015(z=3.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0016(z=3.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0017(z=3.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0018(z=3.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0019(z=3.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0020(z=4.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0021(z=4.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0022(z=4.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0023(z=4.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0024(z=4.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0025(z=5.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0026(z=5.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0027(z=5.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0028(z=5.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0029(z=5.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0030(z=6.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0031(z=6.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0032(z=6.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0033(z=6.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0034(z=6.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0035(z=7.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0036(z=7.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0037(z=7.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0038(z=7.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0039(z=7.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0040(z=8.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0041(z=8.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0042(z=8.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0043(z=8.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0044(z=8.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0045(z=9.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0046(z=9.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0047(z=9.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0048(z=9.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0049(z=9.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0050(z=10.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0051(z=10.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0052(z=10.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0053(z=10.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0054(z=10.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0055(z=11.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0056(z=11.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0057(z=11.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0058(z=11.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0059(z=11.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0060(z=12.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0061(z=12.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0062(z=12.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0063(z=12.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0064(z=12.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0065(z=13.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0066(z=13.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0067(z=13.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0068(z=13.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0069(z=13.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0070(z=14.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0071(z=14.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0072(z=14.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0073(z=14.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0074(z=14.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0075(z=15.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0076(z=15.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0077(z=15.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0078(z=15.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0079(z=15.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0080(z=16.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0081(z=16.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0082(z=16.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0083(z=16.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0084(z=16.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0085(z=17.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0086(z=17.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0087(z=17.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0088(z=17.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0089(z=17.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0090(z=18.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0091(z=18.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0092(z=18.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0093(z=18.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0094(z=18.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0095(z=19.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0096(z=19.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0097(z=19.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0098(z=19.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0099(z=19.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0100(z=20.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0101(z=20.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0102(z=20.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0103(z=20.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0104(z=20.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0105(z=21.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0106(z=21.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0107(z=21.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0108(z=21.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0109(z=21.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0110(z=22.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0111(z=22.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0112(z=22.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0113(z=22.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0114(z=22.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0115(z=23.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0116(z=23.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0117(z=23.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0118(z=23.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0119(z=23.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0120(z=24.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0121(z=24.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0122(z=24.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0123(z=24.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0124(z=24.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0125(z=25.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0126(z=25.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0127(z=25.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0128(z=25.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0129(z=25.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0130(z=26.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0131(z=26.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0132(z=26.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0133(z=26.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0134(z=26.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0135(z=27.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0136(z=27.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0137(z=27.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0138(z=27.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0139(z=27.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0140(z=28.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0141(z=28.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0142(z=28.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0143(z=28.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0144(z=28.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0145(z=29.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0146(z=29.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0147(z=29.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0148(z=29.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0149(z=29.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0150(z=30.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0151(z=30.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0152(z=30.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0153(z=30.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0154(z=30.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0155(z=31.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0156(z=31.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0157(z=31.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0158(z=31.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0159(z=31.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0160(z=32.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0161(z=32.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0162(z=32.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0163(z=32.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0164(z=32.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0165(z=33.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0166(z=33.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0167(z=33.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0168(z=33.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0169(z=33.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0170(z=34.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0171(z=34.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0172(z=34.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0173(z=34.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0174(z=34.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0175(z=35.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0176(z=35.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0177(z=35.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0178(z=35.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0179(z=35.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0180(z=36.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0181(z=36.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0182(z=36.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0183(z=36.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0184(z=36.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0185(z=37.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0186(z=37.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0187(z=37.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0188(z=37.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0189(z=37.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0190(z=38.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0191(z=38.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0192(z=38.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0193(z=38.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0194(z=38.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0195(z=39.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0196(z=39.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0197(z=39.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0198(z=39.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0199(z=39.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0200(z=40.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0201(z=40.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0202(z=40.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0203(z=40.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0204(z=40.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0205(z=41.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0206(z=41.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0207(z=41.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0208(z=41.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0209(z=41.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0210(z=42.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0211(z=42.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0212(z=42.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0213(z=42.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0214(z=42.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0215(z=43.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0216(z=43.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0217(z=43.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0218(z=43.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0219(z=43.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0220(z=44.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0221(z=44.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0222(z=44.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0223(z=44.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0224(z=44.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0225(z=45.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0226(z=45.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0227(z=45.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0228(z=45.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0229(z=45.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0230(z=46.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0231(z=46.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0232(z=46.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0233(z=46.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0234(z=46.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0235(z=47.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0236(z=47.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0237(z=47.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0238(z=47.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0239(z=47.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0240(z=48.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0241(z=48.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0242(z=48.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0243(z=48.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0244(z=48.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0245(z=49.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0246(z=49.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0247(z=49.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0248(z=49.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0249(z=49.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0250(z=50.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0251(z=50.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0252(z=50.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0253(z=50.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0254(z=50.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0255(z=51.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0256(z=51.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0257(z=51.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0258(z=51.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0259(z=51.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0260(z=52.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0261(z=52.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0262(z=52.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0263(z=52.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0264(z=52.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0265(z=53.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0266(z=53.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0267(z=53.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0268(z=53.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0269(z=53.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0270(z=54.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0271(z=54.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0272(z=54.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0273(z=54.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0274(z=54.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0275(z=55.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0276(z=55.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0277(z=55.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0278(z=55.600)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0279(z=55.800)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0280(z=56.000)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0281(z=56.200)_thumb.png" height="40" width="40" class="thumb"/>
+
+<img src="/thumb-slices/layer_0282(z=56.400)_thumb.png" height="40" width="40" class="thumb"/>
+
+
+<img id="diapoActive"/>
+</div>
+<!--! end of #container -->
+
+<!-- JavaScript at the bottom for fast page loading -->
+
+<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="public/third_party/jquery-2.1.0.min.js"><\/script>')
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        var tempoVisible = 3000;
+        var tempoCache = 1000;
+        var cycleDemarre = false;
+        var imageActive = $("#diapoActive");
+        var i = 0;
+        var nbDiapos = 283;
+        // déclaration de la mire comme image active (elle doit être la première image dans le HTML)
+        $("#boutonMire").click(function () {// si appui sur le bouton
+            $('body').mouseover(function () {// il est important de chacher le curseur pour qu'il ne polymérise pas la résine...
+                $(this).css({
+                    cursor: 'none'
+                });
+            }).css("background-color", "black").css("color", "red");
+            // arrière-plan rouge avant basculement du miroir et mise au point
+            $("#instructions").fadeOut(0, function () {// disparition des consignes
+                $('img[class="thumb"]').remove();
+                // on libère la mémoire de toutes les vignettes
+                $('#mire').fadeIn(2000, function () {// apparition de la mire
+                    $("body").keypress(function (e) {
+                        if (e.which == 13) {// si appui sur ENTER
+                            cycleDemarre = true;
+                            $('#mire').fadeOut(2000, function impression() {// fonction récursive qui épuise toutes les images disponibles
+                                function etatDiapo(){
+                                    // Affichage de la pastille verte à chaque diapo
+                                    $.get('etat', function(textReponse){
+                                        console.log("- appel serveur pour état de la diapo : " + textReponse);
+                                    });
+                                }
+                                if (cycleDemarre && i < nbDiapos) {
+                                    $.get('/diapo/' + i++, function (diapoActive) {
+                                        console.log("> diapositive active n°" + i + "/" + nbDiapos + " : " + diapoActive);
+                                        imageActive.attr({
+                                            src: '/slices/' + diapoActive
+                                        }).delay(tempoCache).fadeIn(0,etatDiapo).delay(tempoVisible).fadeOut(0).delay(tempoCache).fadeIn(0,etatDiapo).delay(tempoVisible).fadeOut(0).delay(tempoCache).fadeIn(0,etatDiapo).delay(tempoVisible).fadeOut(0, impression);
+                                    });
+                                }
+                                else if (i == nbDiapos){ // Appel de la fin d'impression
+                                    $.get('/fin', function (textReponse) {
+                                        $("#diapoActive").replaceWith('<h1>' + textReponse + '</h1>');
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        });
+    });
+</script>
+<!-- end third_party-->
+
+</body>
+</html>

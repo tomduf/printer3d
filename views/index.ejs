@@ -26,10 +26,42 @@
             <li>
                 Préparer le kit de nettoyage à température ambiante.
             </li>
-            <li>
-                Cliquer sur le bouton ci-dessous une première fois pour afficher la mise au point puis appuyer sur Entrée pour lancer
-                l'impression.
-            </li>
+            <li>Modifier si nécessaire les valeurs d'impression ci-dessous.</li>
+        </ol>
+        <form id="formArduino" name="formArduino" method="post">
+            <ul>
+                <li>
+                    <label for="epCouches">Épaisseur des couches:</label>
+                    <input name="epCouches" type="text" id="epCouches" value="0.1" size="4" maxlength="4">
+                    mm
+                </li>
+                <li>
+                    <label for="nbExpCouche">Nombre d'expositions par couche:</label>
+                    <input name="nbExpCouche" type="text" id="nbExpCouche" value="3" size="3" maxlength="3">
+                </li>
+                <li>
+                    <label for="intervalleEntreExp">Intervalle entre chaque exposition:</label>
+                    <input name="intervalleEntreExp" type="text" id="intervalleEntreExp" value="1" size="3" maxlength="3">
+                    s</li>
+                <li>
+                    <label for="profPlongee">Profondeur de plongée avant la couche suivante:</label>
+                    <input name="profPlongee" type="text" id="profPlongee" value="5" size="3" maxlength="3">
+                    mm</li>
+                <li>
+                    <label for="tempsArretAvantCoucheSuivante">Temps d'arrêt avant remontée vers la couche suivante:</label>
+                    <input name="tempsArretAvantCoucheSuivante" type="text" id="tempsArretAvantCoucheSuivante" value="1" size="3" maxlength="3">
+                    s</li>
+                <li>
+                    <label for="tempsPauseAvantExpo">Temps de pause entre la remontée et la première exposition:</label>
+                    <input name="tempsPauseAvantExpo" type="text" id="tempsPauseAvantExpo" value="0.1" size="3" maxlength="3">
+                    s</li></ul>
+            <p>
+                <input type="submit" name="submit" id="submit" value="Mettre à jour l'Arduino">
+            </p>
+        </form>
+        <ol start="6">
+            <li>Cliquer sur le bouton ci-dessous une première fois pour afficher la mise au point puis appuyer sur Entrée pour lancer
+                l'impression. </li>
         </ol>
     </div>
     <footer>
