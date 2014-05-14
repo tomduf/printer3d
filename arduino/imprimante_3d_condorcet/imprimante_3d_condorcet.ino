@@ -75,15 +75,18 @@ const float stepsPerRevolution = 200;
 
 // caractéristiques mécaniques
 const float pasVis = 1; // mm
-const float epaisseurCouche = 0.1; // mm
+float epaisseurCouche = 0.1; // mm
 float hauteur = 0;
 
 int numCouche = 1;
 int nbCouches = 10;
 int etatDiapo = 0;
+int intervalleEntreExp = 1; // en secondes
+int tempsArretAvantRemontee = 100; // en millisecondes
+int tempsPauseAvantExpo = 100;  // en millisecondes
 
 // nombre de pas de descente par cycle
-const int pasCycleDown = 1000;
+int pasCycleDown = 1000;
 // si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
 const int pasParCouche = (int)(epaisseurCouche * stepsPerRevolution / pasVis);
 // nombre de pas pour la remontée d'un cycle

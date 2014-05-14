@@ -6,10 +6,14 @@ void receptionDonnees(int byteCount){
     Serial.println("Configuration de l'Arduino");
     Serial.println(Wire.read());
     Serial.println(Wire.read());
+    intervalleEntreExp = Wire.read();
+    Serial.println(intervalleEntreExp);
+    
     Serial.println(Wire.read());
-    Serial.println(Wire.read());
-    Serial.println(Wire.read());
-    Serial.println(Wire.read());
+    tempsArretAvantRemontee = Wire.read();
+    Serial.println(tempsArretAvantRemontee);
+    tempsPauseAvantExpo = Wire.read();
+    Serial.println(tempsPauseAvantExpo);
     }
  }
 }

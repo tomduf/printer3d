@@ -130,13 +130,13 @@ function main() {
                 });
 
                 // Envoi des données de configuration de l'Arduino
-                app.get('/config/:epCouches/:nbExpCouche/:intervalleEntreExp/:profPlongee/:tempsArretAvantCoucheSuivante/:tempsPauseAvantExpo', function(req, res) {
+                app.get('/config/:epCouches/:nbExpCouche/:intervalleEntreExp/:profPlongee/:tempsArretAvantRemontee/:tempsPauseAvantExpo', function(req, res) {
                     wireArduino.writeBytes(0x0A,
                         [req.params.epCouches,
                         req.params.nbExpCouche,
                         req.params.intervalleEntreExp,
                         req.params.profPlongee,
-                        req.params.tempsArretAvantCoucheSuivante,
+                        req.params.tempsArretAvantRemontee,
                         req.params.tempsPauseAvantExpo
                         ], function(err) {res.send("erreur");});
                     res.send("ok"); // Envoi au client

@@ -48,8 +48,8 @@
                     <input name="profPlongee" type="text" id="profPlongee" value="5" size="3" maxlength="3">
                     mm</li>
                 <li>
-                    <label for="tempsArretAvantCoucheSuivante">Temps d'arrêt avant remontée vers la couche suivante:</label>
-                    <input name="tempsArretAvantCoucheSuivante" type="text" id="tempsArretAvantCoucheSuivante" value="100" size="3" maxlength="3">
+                    <label for="tempsArretAvantRemontee">Temps d'arrêt avant remontée vers la couche suivante:</label>
+                    <input name="tempsArretAvantRemontee" type="text" id="tempsArretAvantRemontee" value="100" size="3" maxlength="3">
                     ms</li>
                 <li>
                     <label for="tempsPauseAvantExpo">Temps de pause entre la remontée et la première exposition:</label>
@@ -107,7 +107,7 @@
                     '/' + $("#nbExpCouche").val().toString(16) +
                     '/' + $("#intervalleEntreExp").val().toString(16) +
                     '/' + $("#profPlongee").val().toString(16) +
-                    '/' + $("#tempsArretAvantCoucheSuivante").val().toString(16) +
+                    '/' + $("#tempsArretAvantRemontee").val().toString(16) +
                     '/' + $("#tempsPauseAvantExpo").val().toString(16) , function(textReponse){
                 console.log("- envoi de la configuration à l'Arduino : " + textReponse);
             });
