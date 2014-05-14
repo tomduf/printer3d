@@ -102,9 +102,11 @@
         var imageActive = $("#diapoActive");
         var i = 0;
         var nbDiapos = <%=diaposFichiers.length%>;
-        $("#boutonMire").click(function () {// si appui sur le bouton arduino
-
-        }
+        $("#submit").click(function () {// si appui sur le bouton arduino
+            $.get('/config/:epCouches/:nbExpCouche/:intervalleEntreExp/:profPlongee/:tempsArretAvantCoucheSuivante/:tempsPauseAvantExpo', function(textReponse){
+                console.log("- envoi de la configuration à l'Arduino : " + textReponse);
+            });
+        });
         // déclaration de la mire comme image active (elle doit être la première image dans le HTML)
         $("#boutonMire").click(function () {// si appui sur le bouton
             $('body').mouseover(function () {// il est important de chacher le curseur pour qu'il ne polymérise pas la résine...

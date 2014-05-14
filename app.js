@@ -133,7 +133,7 @@ function main() {
                 // Envoi des données de configuration de l'Arduino
                 app.get('/config/:epCouches/:nbExpCouche/:intervalleEntreExp/:profPlongee/:tempsArretAvantCoucheSuivante/:tempsPauseAvantExpo', function(req, res) {
                     wire.writeBytes(0x0A, [0x0B, 0x0C], function(err) {});
-
+                    res.send("ok"); // Envoi au client
                 });
 
                 // Appel d'une diapo et cycle moteur
