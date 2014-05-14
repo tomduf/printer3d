@@ -130,6 +130,12 @@ function main() {
                     });
                 });
 
+                // Envoi des données de configuration de l'Arduino
+                app.get('/config/:epCouches/:nbExpCouche/:intervalleEntreExp/:profPlongee/:tempsArretAvantCoucheSuivante/:tempsPauseAvantExpo', function(req, res) {
+                    wire.writeBytes(0x0A, [0x0B, 0x0C], function(err) {});
+
+                });
+
                 // Appel d'une diapo et cycle moteur
                 app.get('/diapo/:num_diapo', function(req, res) {
 					if (req.params.num_diapo > 0){

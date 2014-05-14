@@ -2,7 +2,12 @@
 void receptionDonnees(int byteCount){
   while(Wire.available()) {
     mode = Wire.read();
-  }
+    if (mode == 0x0A){    
+    Serial.println(mode);
+    Serial.println(Wire.read());
+    Serial.println(Wire.read());
+    }
+ }
 }
 
 // callback pour le renvoi de données au raspberry
