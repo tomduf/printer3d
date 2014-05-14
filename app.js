@@ -20,8 +20,7 @@ var camera = new RaspiCam({
     output : "./public/images/photo.jpg",
     width : 400,
     height : 300,
-    rotation : 180,
-    timelapse : 30000
+    rotation : 180
 });
 
 
@@ -132,7 +131,7 @@ function main() {
 
                 // Envoi des données de configuration de l'Arduino
                 app.get('/config/:epCouches/:nbExpCouche/:intervalleEntreExp/:profPlongee/:tempsArretAvantCoucheSuivante/:tempsPauseAvantExpo', function(req, res) {
-                    wire.writeBytes(0x0A, [0x0B, 0x0C], function(err) {});
+                    wireArduino.writeBytes(0x0A, [0x0B, 0x0C], function(err) {res.send("erreur");});
                     res.send("ok"); // Envoi au client
                 });
 
