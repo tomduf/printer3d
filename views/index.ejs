@@ -108,7 +108,7 @@
                     '/' + $("#intervalleEntreExp").val().toString(16) +
                     '/' + $("#profPlongee").val().toString(16) +
                     '/' + $("#tempsArretAvantCoucheSuivante").val().toString(16) +
-                    '/' + $("#tempsPauseAvantExpo").val().toString(16) + ', function(textReponse){
+                    '/' + $("#tempsPauseAvantExpo").val().toString(16) , function(textReponse){
                 console.log("- envoi de la configuration à l'Arduino : " + textReponse);
             });
         });
