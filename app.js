@@ -131,7 +131,7 @@ function main() {
 
                 // Envoi des données de configuration de l'Arduino
                 app.get('/config/:epCouches/:nbExpCouche/:intervalleEntreExp/:profPlongee/:tempsArretAvantCoucheSuivante/:tempsPauseAvantExpo', function(req, res) {
-                    wireArduino.writeBytes(0x0A, [epCouches, nbExpCouche], function(err) {res.send("erreur");});
+                    wireArduino.writeBytes(0x0A, [req.params.epCouches, req.params.nbExpCouche], function(err) {res.send("erreur");});
                     res.send("ok"); // Envoi au client
                 });
 

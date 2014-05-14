@@ -103,7 +103,7 @@
         var i = 0;
         var nbDiapos = <%=diaposFichiers.length%>;
         $("#submit").click(function () {// si appui sur le bouton arduino
-            $.get('/config/' + $("#epCouches").val() +
+            $.get('/config/' + $("#epCouches").val().toString(16) +
                     '/' + $("#nbExpCouche").val().toString(16) +
                     '/' + $("#intervalleEntreExp").val().toString(16) +
                     '/' + $("#profPlongee").val().toString(16) +
