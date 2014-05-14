@@ -103,7 +103,12 @@
         var i = 0;
         var nbDiapos = <%=diaposFichiers.length%>;
         $("#submit").click(function () {// si appui sur le bouton arduino
-            $.get('/config/:epCouches/:nbExpCouche/:intervalleEntreExp/:profPlongee/:tempsArretAvantCoucheSuivante/:tempsPauseAvantExpo', function(textReponse){
+            $.get('/config/' + $("#epCouches").val() +
+                    '/' + $("#nbExpCouche").val().toString(16) +
+                    '/' + $("#intervalleEntreExp").val().toString(16) +
+                    '/' + $("#profPlongee").val().toString(16) +
+                    '/' + $("#tempsArretAvantCoucheSuivante").val().toString(16) +
+                    '/' + $("#tempsPauseAvantExpo").val().toString(16) + ', function(textReponse){
                 console.log("- envoi de la configuration à l'Arduino : " + textReponse);
             });
         });
