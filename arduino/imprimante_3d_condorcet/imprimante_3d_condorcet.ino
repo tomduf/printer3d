@@ -88,11 +88,11 @@ int tempsPauseAvantExpo = 100;  // en millisecondes
 // nombre de pas de descente par cycle
 int pasCycleDown = 1000;
 // si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
-const int pasParCouche = (int)(epaisseurCouche * stepsPerRevolution / pasVis);
+int pasParCouche = (int)(epaisseurCouche * stepsPerRevolution / pasVis);
 // nombre de pas pour la remontée d'un cycle
-const int pasCycleUp = pasCycleDown - pasParCouche;
+int pasCycleUp = pasCycleDown - pasParCouche;
 // on remonte de la valeur initiale plus 1 cm = 10mm
-const int pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution / pasVis); 
+int pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution / pasVis); 
 
 
 // Déclaration des ports pour le moteur

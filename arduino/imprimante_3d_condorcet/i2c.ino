@@ -3,7 +3,7 @@ void receptionDonnees(int byteCount){
   while(Wire.available()) {
     mode = Wire.read();
     if (mode == 0x0A){    
-    Serial.println("Configuration de l'Arduino");
+    Serial.println("Configuration de l'Arduino:");
     Serial.println(Wire.read());
     Serial.println(Wire.read());
     intervalleEntreExp = Wire.read();
