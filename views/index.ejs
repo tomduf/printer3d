@@ -111,7 +111,7 @@
                     '/' + $("#tempsPauseAvantExpo").val().toString(16) , function(textReponse){
                 console.log("- envoi de la configuration à l'Arduino : " + textReponse);
             });
-            tempoCache = $("#intervalleEntreExp").val().toInt();
+            tempoCache = parseInt($("#intervalleEntreExp").val());
         });
         // déclaration de la mire comme image active (elle doit être la première image dans le HTML)
         $("#boutonMire").click(function () {// si appui sur le bouton
