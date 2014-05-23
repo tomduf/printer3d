@@ -97,7 +97,7 @@
 
     $(document).ready(function () {
         var tempoVisible = 3000;
-        var tempoCache = $("#intervalleEntreExp").val();
+        var tempoCache = 1000;
         var cycleDemarre = false;
         var imageActive = $("#diapoActive");
         var i = 0;
@@ -111,6 +111,7 @@
                     '/' + $("#tempsPauseAvantExpo").val().toString(16) , function(textReponse){
                 console.log("- envoi de la configuration à l'Arduino : " + textReponse);
             });
+            tempoCache = $("#intervalleEntreExp").val();
         });
         // déclaration de la mire comme image active (elle doit être la première image dans le HTML)
         $("#boutonMire").click(function () {// si appui sur le bouton
