@@ -1,13 +1,12 @@
 void cycle(){
       affichageTexte("Cycle","",numCouche,"Down");
-      delay(1000);
       pas = -1;
      for (int i = 0; i < pasCycleDown ; i++){
         myStepper.step(pas);        
       }
 
       affichageTexte("Cycle","",numCouche,"Up");
-      delay(1000);
+      delay(tempsArretAvantRemontee);
       pas = 1;
       for (int i = 0; i < pasCycleUp ; i++){ 
         myStepper.step(pas);        
@@ -17,18 +16,16 @@ void cycle(){
       numCouche++;
       Wire.write(messagefinCycle); // Envoi de la fin du cycle au serveur
       mode = modeStop;
-      delay(500);
+      delay(tempsPauseAvantExpo);
       
 }
 
 void remonteePlateau(){
     affichageTexte("Montee","",numCouche,"Debut");
-    delay(500);
     pas = 1;
-    for (int i = 0; i < 5000 ; i++){
+    for (int i = 0; i < pasRemontee ; i++){
       myStepper.step(pas);        
     }
-    delay(500);
     affichageTexte("Montee","",numCouche,"Fin");
     Wire.write(messagefinRemontee); // Envoi de la fin de remontée du plateau au serveur
     mode = modeStop;

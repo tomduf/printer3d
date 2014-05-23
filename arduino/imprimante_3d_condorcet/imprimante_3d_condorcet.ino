@@ -68,6 +68,7 @@ int etatBas, etatStop, etatHaut;
 
 String texteInfo; 
 boolean changerTexte = false;
+boolean modifConfig = false;
 boolean appuiHaut, appuiBas, appuiStop;
 
 // nombre de pas du moteur 42BYG304
@@ -75,20 +76,22 @@ const float stepsPerRevolution = 200;
 
 // caractéristiques mécaniques
 const float pasVis = 1; // mm
-float epaisseurCouche = 0.1; // mm
+float epaisseurCouche = 10; // en 1/100 mm
 float hauteur = 0;
 
 int numCouche = 1;
 int nbCouches = 10;
+int nbExpCouche = 3;
+int profPlongee = 5;  // en mm
 int etatDiapo = 0;
 int intervalleEntreExp = 1; // en secondes
 int tempsArretAvantRemontee = 100; // en millisecondes
 int tempsPauseAvantExpo = 100;  // en millisecondes
 
-// nombre de pas de descente par cycle
-int pasCycleDown = 1000;
+// nombre de pas de descente par cycle (en fonction de la profondeur de plongée)
+int pasCycleDown = (int)(profPlongee * stepsPerRevolution / pasVis);
 // si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
-int pasParCouche = (int)(epaisseurCouche * stepsPerRevolution / pasVis);
+int pasParCouche = (int)(0.01 * epaisseurCouche * stepsPerRevolution / pasVis);
 // nombre de pas pour la remontée d'un cycle
 int pasCycleUp = pasCycleDown - pasParCouche;
 // on remonte de la valeur initiale plus 1 cm = 10mm
@@ -139,15 +142,27 @@ void setup() {
 }
 
 void loop() {
+  // Modification de la config
+  if (modifConfig){
+    // nombre de pas de descente par cycle (en fonction de la profondeur de plongée)
+    pasCycleDown = (int)(profPlongee * stepsPerRevolution / pasVis);
+    // si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
+    pasParCouche = (int)(0.01 * epaisseurCouche * stepsPerRevolution / pasVis);
+    // nombre de pas pour la remontée d'un cycle
+    pasCycleUp = pasCycleDown - pasParCouche;
+    // on remonte de la valeur initiale plus 1 cm = 10mm
+    pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution / pasVis); 
+    modifConfig = false;
+  }
   // Appuis sur les boutons. Par sécurité, la pression doit etre maintenue
   etatStop=digitalRead(boutonStop); // bouton prioritaire sur tout
   if (etatStop==LOW){
-     mode = modeStop;
+    mode = modeStop;
   }
   etatBas=digitalRead(boutonBas);
   if (etatBas==LOW){   // si bouton bas appuyé
-     mode = modeBas;   // on se place en mode "descente"
-     appuiBas = true;  // et en mode "bouton appuyé"
+    mode = modeBas;   // on se place en mode "descente"
+    appuiBas = true;  // et en mode "bouton appuyé"
   }
   else if (appuiBas){  // si on n'appuie plus alros qu'on était en mode "bouton appuyé"
     mode = modeStop;   // alors on se place en mode "stop"
@@ -156,17 +171,19 @@ void loop() {
 
   etatHaut=digitalRead(boutonHaut);
   if (etatHaut==LOW){
-     mode = modeHaut;
-     appuiHaut = true;
+    mode = modeHaut;
+    appuiHaut = true;
   }
   else if (appuiHaut){
     mode = modeStop;
     appuiHaut = false;
   }
-  
+
   // Appel au balayage de tous les modes
   balayageModes();
 }
+
+
 
 
 

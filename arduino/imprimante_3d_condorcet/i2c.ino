@@ -4,16 +4,18 @@ void receptionDonnees(int byteCount){
     mode = Wire.read();
     if (mode == 0x0A){    
     Serial.println("Configuration de l'Arduino:");
-    Serial.println(Wire.read());
+    epaisseurCouche = Wire.read();
+    Serial.println(epaisseurCouche);
     Serial.println(Wire.read());
     intervalleEntreExp = Wire.read();
     Serial.println(intervalleEntreExp);
-    
-    Serial.println(Wire.read());
+    profPlongee = Wire.read();
+    Serial.println(profPlongee);
     tempsArretAvantRemontee = Wire.read();
     Serial.println(tempsArretAvantRemontee);
     tempsPauseAvantExpo = Wire.read();
     Serial.println(tempsPauseAvantExpo);
+    modifConfig = true;
     }
  }
 }
