@@ -1,4 +1,4 @@
-/* 
+/*
  Programme utilisé en combinaison avec le Raspberry Pi
  */
 
@@ -52,13 +52,13 @@
 #define	GREEN           0x07E0
 #define CYAN            0x07FF
 #define MAGENTA         0xF81F
-#define YELLOW          0xFFE0  
+#define YELLOW          0xFFE0
 #define WHITE           0xFFFF
 
 #define BUFFPIXEL       20
 
 // déclaration de l'écran tft pour afficher les images de la carte SD
-Adafruit_SSD1331 tft = Adafruit_SSD1331(cs, dc, rst); 
+Adafruit_SSD1331 tft = Adafruit_SSD1331(cs, dc, rst);
 
 // Déclaration des variables
 int vitesse =           100;
@@ -66,7 +66,7 @@ int mode =              0;
 int pas =               0;
 int etatBas, etatStop, etatHaut;
 
-String texteInfo; 
+String texteInfo;
 boolean changerTexte = false;
 boolean modifConfig = false;
 boolean appuiHaut, appuiBas, appuiStop;
@@ -75,33 +75,33 @@ boolean appuiHaut, appuiBas, appuiStop;
 const float stepsPerRevolution = 200;
 
 // caractéristiques mécaniques
-const float pasVis = 1; // mm
+const int pasVis = 1; // mm
 float epaisseurCouche = 10; // en 1/100 mm
 float hauteur = 0;
 
-int numCouche = 1;
-int nbCouches = 10;
-int nbExpCouche = 3;
-int profPlongee = 5;  // en mm
-int etatDiapo = 0;
-int intervalleEntreExp = 1; // en secondes
-int tempsArretAvantRemontee = 100; // en millisecondes
-int tempsPauseAvantExpo = 100;  // en millisecondes
+short int numCouche = 1;
+short int nbCouches = 10;
+short int nbExpCouche = 3;
+short int profPlongee = 5;  // en mm
+short int etatDiapo = 0;
+short int intervalleEntreExp = 1; // en secondes
+short int tempsArretAvantRemontee = 100; // en millisecondes
+short int tempsPauseAvantExpo = 100;  // en millisecondes
 
 // nombre de pas de descente par cycle (en fonction de la profondeur de plongée)
-int pasCycleDown = (int)(profPlongee * stepsPerRevolution / pasVis);
+short int pasCycleDown = (int)(profPlongee * stepsPerRevolution / pasVis);
 // si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
-int pasParCouche = (int)(0.01 * epaisseurCouche * stepsPerRevolution / pasVis);
+short int pasParCouche = (int)(0.01 * epaisseurCouche * stepsPerRevolution / pasVis);
 // nombre de pas pour la remontée d'un cycle
-int pasCycleUp = pasCycleDown - pasParCouche;
+short int pasCycleUp = pasCycleDown - pasParCouche;
 // on remonte de la valeur initiale plus 1 cm = 10mm
-int pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution / pasVis); 
+short int pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution / pasVis);
 
 
 // Déclaration des ports pour le moteur
 // Initialisation de la bibliothèque (dans le tuto initial : broches 8 à 11, ici 2 à 6) :
 
-Stepper myStepper(stepsPerRevolution, 2,3,5,6);            
+Stepper myStepper(stepsPerRevolution, 2, 3, 5, 6);
 
 // fichier image
 File bmpFile;
@@ -121,29 +121,27 @@ void setup() {
   Wire.onRequest(envoiMode);
   // Initialisation de la vitesse du moteur
   myStepper.setSpeed(vitesse);
-  pinMode(cs, OUTPUT);
-  digitalWrite(cs, HIGH);
   // intialisation des boutons
   pinMode(boutonBas, INPUT);
   pinMode(boutonStop, INPUT);
   pinMode(boutonHaut, INPUT);
+  // Activation de la connexion avec la SD card
+  pinMode(cs, OUTPUT);
+  digitalWrite(cs, HIGH);
   // intialisation de l'écran OLED
   tft.begin();
+  tft.fillScreen(WHITE);
+
   // Affichage de la grille sans les valeurs
-  affichageGrille();
-  /*
-  Serial.print("Initialisation de la carte SD...");
-   if (!SD.begin(SD_CS)) {
-   Serial.println("echec!");
-   return;
-   }
-   Serial.println("SD OK!");
-   */
+  //affichageGrille();
+  SD.begin(SD_CS);
+  bmpDraw("logo.bmp", 0, 0);
+
 }
 
 void loop() {
   // Modification de la config
-  if (modifConfig){
+  if (modifConfig) {
     // nombre de pas de descente par cycle (en fonction de la profondeur de plongée)
     pasCycleDown = (int)(profPlongee * stepsPerRevolution / pasVis);
     // si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
@@ -151,30 +149,30 @@ void loop() {
     // nombre de pas pour la remontée d'un cycle
     pasCycleUp = pasCycleDown - pasParCouche;
     // on remonte de la valeur initiale plus 1 cm = 10mm
-    pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution / pasVis); 
+    pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution / pasVis);
     modifConfig = false;
   }
   // Appuis sur les boutons. Par sécurité, la pression doit etre maintenue
-  etatStop=digitalRead(boutonStop); // bouton prioritaire sur tout
-  if (etatStop==LOW){
+  etatStop = digitalRead(boutonStop); // bouton prioritaire sur tout
+  if (etatStop == LOW) {
     mode = modeStop;
   }
-  etatBas=digitalRead(boutonBas);
-  if (etatBas==LOW){   // si bouton bas appuyé
+  etatBas = digitalRead(boutonBas);
+  if (etatBas == LOW) { // si bouton bas appuyé
     mode = modeBas;   // on se place en mode "descente"
     appuiBas = true;  // et en mode "bouton appuyé"
   }
-  else if (appuiBas){  // si on n'appuie plus alros qu'on était en mode "bouton appuyé"
+  else if (appuiBas) { // si on n'appuie plus alros qu'on était en mode "bouton appuyé"
     mode = modeStop;   // alors on se place en mode "stop"
     appuiBas = false;  // et on remet le mode à "bouton relevé"
   }
 
-  etatHaut=digitalRead(boutonHaut);
-  if (etatHaut==LOW){
+  etatHaut = digitalRead(boutonHaut);
+  if (etatHaut == LOW) {
     mode = modeHaut;
     appuiHaut = true;
   }
-  else if (appuiHaut){
+  else if (appuiHaut) {
     mode = modeStop;
     appuiHaut = false;
   }
@@ -182,8 +180,4 @@ void loop() {
   // Appel au balayage de tous les modes
   balayageModes();
 }
-
-
-
-
 
