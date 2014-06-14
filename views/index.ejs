@@ -119,11 +119,11 @@
                 $(this).css({
                     cursor: 'none'
                 });
-            }).css("background-color", "black").css("color", "red");
+            }).css("background-color", "black").css("color", "red").css("overflow","hidden");
             // arrière-plan rouge avant basculement du miroir et mise au point
             $("#instructions").fadeOut(0, function () {// disparition des consignes
-                $('img[class="thumb"]').remove();
                 // on libère la mémoire de toutes les vignettes
+                $('img[class="thumb"]').remove();
                 $('#mire').fadeIn(2000, function () {// apparition de la mire
                     $("body").keypress(function (e) {
                         if (e.which == 13) {// si appui sur ENTER

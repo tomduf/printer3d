@@ -1,3 +1,10 @@
+/*
+
+Printer 3D
+Author : Thomas DUFOUR <thomas.dufour@condorcet93.fr>
+Company : Lycée Condorcet - Montreuil (FR)
+
+*/
 
 /**
  * Module dependencies.
@@ -103,6 +110,7 @@ function main() {
 	
 	// Lecture du dossier des miniatures	
     fs.readdir(dossier_miniatures, function(err1, fichiersThumb) {
+        // Si le dossier n'existe pas
         if (err1) {
             console.log("* les miniatures n'existent pas, création automatique en cours...");
             // Création du dossier thumb-slices
