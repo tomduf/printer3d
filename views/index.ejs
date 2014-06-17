@@ -56,7 +56,7 @@
                     <input name="tempsPauseAvantExpo" type="text" id="tempsPauseAvantExpo" value="100" size="3" maxlength="3">
                     ms</li></ul>
             <p>
-                <input type="button" name="submit" id="submit" value="Mettre à jour l'Arduino">
+                <input type="button" name="submitArduino" id="submitArduino" value="Mettre à jour l'Arduino">
             </p>
         </form>
         <ol start="6">
@@ -101,8 +101,18 @@
         var cycleDemarre = false;
         var imageActive = $("#diapoActive");
         var i = 0;
+        var configArduinoMasquee = true;
         var nbDiapos = <%=diaposFichiers.length%>;
-        $("#submit").click(function () {// si appui sur le bouton arduino
+        // Modification des valeurs de l'Arduino
+        $("#lienArduino").click(function (){
+            if (configArduinoMasquee)
+                $("#formArduino").slideDown();
+            else
+                $("#formArduino").slideUp();
+            configArduinoMasquee = !configArduinoMasquee;
+        });
+        // Envoi de la config à l'Arduino
+        $("#submitArduino").click(function () {// si appui sur le bouton arduino
             $.get('/config/' + $("#epCouches").val().toString(16) +
                     '/' + $("#nbExpCouche").val().toString(16) +
                     '/' + $("#intervalleEntreExp").val().toString(16) +

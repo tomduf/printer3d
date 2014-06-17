@@ -3,12 +3,12 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Imprimante 3D - Lycée Condorcet / Montreuil</title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='./public/stylesheets/style.css'/>
 </head>
 <body>
 <div id="instructions">
     <header>
-        <img src="/images/photo.jpg" width="400" height="300" style="float:right"/>
+        <img src="./public/images/photo.jpg" width="400" height="300" style="float:right"/>
         <h1>Imprimante 3D</h1>
         <h2>Lycée Condorcet - Montreuil</h2>
     </header>
@@ -27,7 +27,7 @@
             <li>
                 Préparer le kit de nettoyage à température ambiante.
             </li>
-            <li>Modifier si nécessaire les valeurs d'impression ci-dessous.</li>
+            <li>Modifier si nécessaire <a id= "lienArduino" href="#">les valeurs d'impression de l'Arduino</a>.</li>
         </ol>
         <form id="formArduino" name="formArduino" method="post">
             <ul>
@@ -57,7 +57,7 @@
                     <input name="tempsPauseAvantExpo" type="text" id="tempsPauseAvantExpo" value="0.1" size="3" maxlength="3">
                     s</li></ul>
             <p>
-                <input type="submit" name="submit" id="submit" value="Mettre à jour l'Arduino">
+                <input type="submit" name="submitArduino" id="submitArduino" value="Mettre à jour l'Arduino">
             </p>
         </form>
         <ol start="6">
@@ -76,7 +76,7 @@
 </div>
 <div id="images">
 <!-- Oouverture de toutes les vignettes -->
-<img src="/images/mire_mise_au_point.png" id="mire"/>
+<img src="./public/images/mire_mise_au_point.png" id="mire"/>
 
 
 <img src="/thumb-slices/layer_0001(z=0.200)_thumb.png" height="40" width="40" class="thumb"/>
@@ -664,7 +664,16 @@
         var cycleDemarre = false;
         var imageActive = $("#diapoActive");
         var i = 0;
+        var configArduinoMasquee = true;
         var nbDiapos = 283;
+        // Modification des valeurs de l'Arduino
+        $("#lienArduino").click(function (){
+            if (configArduinoMasquee)
+                $("#formArduino").slideDown();
+            else
+                $("#formArduino").slideUp();
+            configArduinoMasquee = !configArduinoMasquee;
+        });
         // déclaration de la mire comme image active (elle doit être la première image dans le HTML)
         $("#boutonMire").click(function () {// si appui sur le bouton
             $('body').mouseover(function () {// il est important de chacher le curseur pour qu'il ne polymérise pas la résine...

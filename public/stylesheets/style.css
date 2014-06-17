@@ -23,3 +23,7 @@ a {
     /* Calcul : (720 - H)/2 mais il vaut mieux recentrer vers le haut*/
     margin-top:0px;
 }
+
+#formArduino {
+    display : none;
+}
