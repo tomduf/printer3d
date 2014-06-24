@@ -15,15 +15,13 @@ void bmpDraw(char *filename, uint8_t x, uint8_t y) {
 
   if((x >= tft.width()) || (y >= tft.height())) return;
 
-  /*Serial.println();
-  Serial.print("Loading image '");
-  Serial.print(filename);
-  Serial.println('\'');
-  */
   // Open requested file on SD card
   bmpFile = SD.open(filename);
 
   // Parse BMP header
+  tft.setTextColor(BLACK);
+  tft.setCursor(4,5);
+
   if(read16(bmpFile) == 0x4D42) { // BMP signature
     //Serial.print("File size: ");
     read32(bmpFile); //  Taille du fichier
@@ -35,17 +33,13 @@ void bmpDraw(char *filename, uint8_t x, uint8_t y) {
     bmpWidth  = read32(bmpFile);
     bmpHeight = read32(bmpFile);
     if(read16(bmpFile) == 1) { // # planes -- must be '1'
-      Serial.println("lec");
+      //Serial.println("lec");
       
       bmpDepth = read16(bmpFile); // bits per pixel
       //Serial.print("Bit Depth: "); Serial.println(bmpDepth);
       if((bmpDepth == 24) && (read32(bmpFile) == 0)) { // 0 = uncompressed
 
         goodBmp = true; // Supported BMP format -- proceed!
-        /*Serial.print("Image size: ");
-        Serial.print(bmpWidth);
-        Serial.print('x');
-        Serial.println(bmpHeight);*/
 
         // BMP rows are padded (if needed) to 4-byte boundary
         rowSize = (bmpWidth * 3 + 3) & ~3;
@@ -99,14 +93,10 @@ void bmpDraw(char *filename, uint8_t x, uint8_t y) {
             tft.pushColor(tft.Color565(r,g,b));
           } // end pixel
         } // end scanline
-        Serial.print("Loaded in ");
-        Serial.print(millis() - startTime);
-        Serial.println(" ms");
       } // end goodBmp
     }
   }
 
   bmpFile.close();
-  if(!goodBmp) Serial.println("pb");
 }
 

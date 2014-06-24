@@ -73,6 +73,9 @@ void balayageModes(){
       etatDiapo=0;
     }
     break;
+  case modeConfig :
+    affichageTexte("config","ok",0,"");
+    changerTexte = false;
   }
   if (changerTexte)
     affichageTexte(texteInfo, "", numCouche, "");

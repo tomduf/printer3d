@@ -31,7 +31,7 @@ void affichageGrille(){
   tft.print("Etat");
 }
 
-// affichage et rafraichissement des textes variables
+// affichage et rafraichissement des textes variables sur quatre lignes
 void affichageTexte(String text1, String text2, int text3, String text4){
   // Affichage du mode
   tft.setTextColor(BLUE);
@@ -72,4 +72,20 @@ void affichageTexte(String text1, String text2, int text3, String text4){
     tft.fillCircle(86, 56, 5, GREEN);
 }
 
+// surcharge avec un seul texte (efface tout)
+void affichageTexte(String text){
+  // Affichage du fond blanc
+  tft.fillScreen(WHITE);
+  tft.setTextColor(BLACK);
+  tft.setCursor(5,20);
+  tft.print(text);
+}
+// surcharge avec un seul texte (entier)
+void affichageTexte(int text){
+  // Affichage du fond blanc
+  tft.fillScreen(WHITE);
+  tft.setTextColor(BLACK);
+  tft.setCursor(5,20);
+  tft.print(text);
+}
 

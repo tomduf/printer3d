@@ -13,16 +13,16 @@
 #define ARDUINO_ADDRESS 0x05
 
 // déclaration des broches pour l'écran (avec SPI)
-#define sclk                13
-#define mosi                11
-#define cs                  10
-#define rst                 9
-#define dc                  8
+#define sclk                52 // 13
+#define mosi                51 // 11
+#define cs                  53 // 10
+#define rst                 49 // 9
+#define dc                  48 // 8
 
 // déclaration des boutons de commande manuelle du moteur
-#define boutonBas           7
+#define boutonBas           24
 #define boutonStop          1
-#define boutonHaut          0
+#define boutonHaut          22
 
 // déclaration des modes de fonctionnement de l'imprimante
 #define modeStop            0
@@ -32,6 +32,7 @@
 #define modeEtatDiapo       4
 #define modePlateau         7
 #define modeCycle           9
+#define modeConfig          0x0A
 
 // définition des valeurs de messages entre le RPi et l'Arduino
 #define messageStop         0
@@ -39,11 +40,11 @@
 #define messagefinCycle     8
 
 // pour Arduino Uno/Duemilanove, etc
-// connecter la carte SD avec MOSI sur la broche 11,
-// MISO sur la broche 12
-// SCK sur la broche 13 (standard)
-// ensuite la broche 4 va vers CS (or whatever you have set up)
-#define SD_CS 4    // Set the chip select line to whatever you use (4 doesnt conflict with the library)
+// MOSI sur la broche 11 uno, 51 mega
+// MISO sur la broche 12, 50 mega
+// SCK sur la broche 13 (standard), 52 mega
+// ensuite la broche 4 va vers CS (or whatever you have set up) sur mega 46
+#define SD_CS 46    // Set the chip select line to whatever you use (4 doesnt conflict with the library)
 
 // définition des couleurs
 #define	BLACK           0x0000
@@ -67,26 +68,25 @@ int pas =               0;
 int etatBas, etatStop, etatHaut;
 
 String texteInfo;
-boolean changerTexte = false;
-boolean modifConfig = false;
+boolean changerTexte(false), modifConfig(false);
 boolean appuiHaut, appuiBas, appuiStop;
 
 // nombre de pas du moteur 42BYG304
-const float stepsPerRevolution = 200;
+const float stepsPerRevolution(200);
 
 // caractéristiques mécaniques
-const int pasVis = 1; // mm
-float epaisseurCouche = 10; // en 1/100 mm
-float hauteur = 0;
+const int pasVis(1); // mm
+float epaisseurCouche(10); // en 1/100 mm
+float hauteur(0);
 
-short int numCouche = 1;
-short int nbCouches = 10;
-short int nbExpCouche = 3;
-short int profPlongee = 5;  // en mm
-short int etatDiapo = 0;
-short int intervalleEntreExp = 1; // en secondes
-short int tempsArretAvantRemontee = 100; // en millisecondes
-short int tempsPauseAvantExpo = 100;  // en millisecondes
+short int numCouche(1);
+short int nbCouches(10);
+short int nbExpCouche(3);
+short int profPlongee(5);  // en mm
+short int etatDiapo(0);
+short int intervalleEntreExp(1); // en secondes
+short int tempsArretAvantRemontee(100); // en millisecondes
+short int tempsPauseAvantExpo(100);  // en millisecondes
 
 // nombre de pas de descente par cycle (en fonction de la profondeur de plongée)
 short int pasCycleDown = (int)(profPlongee * stepsPerRevolution / pasVis);
@@ -99,9 +99,9 @@ short int pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution
 
 
 // Déclaration des ports pour le moteur
-// Initialisation de la bibliothèque (dans le tuto initial : broches 8 à 11, ici 2 à 6) :
+// Initialisation de la bibliothèque (dans le tuto initial : broches 8 à 11, sur le mega 30 à 36 par pas de 2, sur uno 2,3, 5, 6) :
 
-Stepper myStepper(stepsPerRevolution, 2, 3, 5, 6);
+Stepper myStepper(stepsPerRevolution, 30, 32, 34, 36);
 
 // fichier image
 File bmpFile;
@@ -111,8 +111,6 @@ int bmpWidth, bmpHeight;
 uint8_t bmpDepth, bmpImageoffset;
 
 void setup() {
-  // initialisation du port série
-  Serial.begin(9600);
   // initialisation de l'i2c comme esclave
   Wire.begin(ARDUINO_ADDRESS);
   // Déclencheur à la réception de données
@@ -134,9 +132,10 @@ void setup() {
 
   // Affichage de la grille sans les valeurs
   //affichageGrille();
-  SD.begin(SD_CS);
-  bmpDraw("logo.bmp", 0, 0);
-
+  if (SD.begin(SD_CS))
+    bmpDraw("logo.bmp", 0, 0);
+  delay(3000);
+  affichageGrille();
 }
 
 void loop() {
@@ -150,6 +149,7 @@ void loop() {
     pasCycleUp = pasCycleDown - pasParCouche;
     // on remonte de la valeur initiale plus 1 cm = 10mm
     pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution / pasVis);
+    affichageTexte("", "", epaisseurCouche, "");
     modifConfig = false;
   }
   // Appuis sur les boutons. Par sécurité, la pression doit etre maintenue
