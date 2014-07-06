@@ -7,7 +7,7 @@ void balayageModes(){
       if (texteInfo != "Stop"){
         texteInfo = "Stop";
         changerTexte = true;
-      }
+      }        
       pas = 0;
       etatDiapo=0;
     }
@@ -75,14 +75,16 @@ void balayageModes(){
     break;
   case modeConfig :
     affichageTexte("config","ok",0,"");
-    changerTexte = false;
+    changerTexte = true;
   }
   if (changerTexte)
-    affichageTexte(texteInfo, "", numCouche, "");
+    affichageTexte(texteInfo, "", nbPasMoteur, "");
   changerTexte = false; 
-
+  
+  // Rotation d'un pas
   if (mode == modeHaut || mode == modeBas){
     myStepper.step(pas);
+    nbPasMoteur -= pas;
     envoiMode();
   }
   else if (mode == modeCycle)    // cycle moteur (bas -> haut - épaisseur couche)
@@ -90,5 +92,7 @@ void balayageModes(){
 
   else if (mode == modePlateau)  // cycle de remontée du plateau
       remonteePlateau();
+  else if (mode == modePriseRef)
+      priseReference();
 }
 

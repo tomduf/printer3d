@@ -20,8 +20,8 @@
 #define dc                  48 // 8
 
 // déclaration des boutons de commande manuelle du moteur
+#define boutonStop          26
 #define boutonBas           24
-#define boutonStop          1
 #define boutonHaut          22
 
 // déclaration des modes de fonctionnement de l'imprimante
@@ -30,9 +30,17 @@
 #define modeBas             2
 #define modePrint           3
 #define modeEtatDiapo       4
+#define modePriseRef        5
 #define modePlateau         7
 #define modeCycle           9
 #define modeConfig          0x0A
+
+#define ecran1              1
+#define ecran2              2
+#define ecran3              3
+#define ecran4              4
+#define ecran5              5
+#define ecran6              6
 
 // définition des valeurs de messages entre le RPi et l'Arduino
 #define messageStop         0
@@ -96,7 +104,8 @@ short int pasParCouche = (int)(0.01 * epaisseurCouche * stepsPerRevolution / pas
 short int pasCycleUp = pasCycleDown - pasParCouche;
 // on remonte de la valeur initiale plus 1 cm = 10mm
 short int pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution / pasVis);
-
+// Etat de position du moteur en pas (à intialiser à la prise de référence sur le bouton stop)
+short int nbPasMoteur = 999;
 
 // Déclaration des ports pour le moteur
 // Initialisation de la bibliothèque (dans le tuto initial : broches 8 à 11, sur le mega 30 à 36 par pas de 2, sur uno 2,3, 5, 6) :
@@ -130,12 +139,12 @@ void setup() {
   tft.begin();
   tft.fillScreen(WHITE);
 
-  // Affichage de la grille sans les valeurs
-  //affichageGrille();
+  // Affichage de l'écran d'accueil
   if (SD.begin(SD_CS))
     bmpDraw("logo.bmp", 0, 0);
   delay(3000);
-  affichageGrille();
+  // On débute par la prise de référénce
+  mode = modePriseRef;
 }
 
 void loop() {
@@ -153,24 +162,27 @@ void loop() {
     modifConfig = false;
   }
   // Appuis sur les boutons. Par sécurité, la pression doit etre maintenue
-  etatStop = digitalRead(boutonStop); // bouton prioritaire sur tout
-  if (etatStop == LOW) {
+  etatStop = digitalRead(boutonStop); // bouton de prise de référence supérieure en début de programme
+  if (etatStop == LOW) { // bouton de fin de course haut et prise de référence
     mode = modeStop;
+    nbPasMoteur = 0; //  RAZ de la référence moteur
   }
   etatBas = digitalRead(boutonBas);
   if (etatBas == LOW) { // si bouton bas appuyé
     mode = modeBas;   // on se place en mode "descente"
     appuiBas = true;  // et en mode "bouton appuyé"
   }
-  else if (appuiBas) { // si on n'appuie plus alros qu'on était en mode "bouton appuyé"
+  else if (appuiBas) { // si on n'appuie plus alors qu'on était en mode "bouton appuyé"
     mode = modeStop;   // alors on se place en mode "stop"
     appuiBas = false;  // et on remet le mode à "bouton relevé"
   }
 
   etatHaut = digitalRead(boutonHaut);
   if (etatHaut == LOW) {
-    mode = modeHaut;
-    appuiHaut = true;
+    if (etatStop != LOW){ // Par sécurité on ne peut pas aller plus loin que la fin de course
+      mode = modeHaut;
+      appuiHaut = true;
+    }
   }
   else if (appuiHaut) {
     mode = modeStop;
