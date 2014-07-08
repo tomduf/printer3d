@@ -2,7 +2,7 @@
 void receptionDonnees(int byteCount){
   while(Wire.available()) {
     mode = Wire.read();
-    if (mode == 0x0A){    
+    if (mode == 0x0A){
       epaisseurCouche = Wire.read();
       intervalleEntreExp = Wire.read();
       profPlongee = Wire.read();

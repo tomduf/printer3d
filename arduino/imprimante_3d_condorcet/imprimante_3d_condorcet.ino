@@ -33,7 +33,8 @@
 #define modePriseRef        5
 #define modePlateau         7
 #define modeCycle           9
-#define modeConfig          0x0A
+#define modeConfig          10
+#define modePrincipal       11
 
 #define ecran1              1
 #define ecran2              2
@@ -120,6 +121,7 @@ int bmpWidth, bmpHeight;
 uint8_t bmpDepth, bmpImageoffset;
 
 void setup() {
+  Serial.begin(9600);
   // initialisation de l'i2c comme esclave
   Wire.begin(ARDUINO_ADDRESS);
   // Déclencheur à la réception de données
@@ -148,19 +150,9 @@ void setup() {
 }
 
 void loop() {
-  // Modification de la config
-  if (modifConfig) {
-    // nombre de pas de descente par cycle (en fonction de la profondeur de plongée)
-    pasCycleDown = (int)(profPlongee * stepsPerRevolution / pasVis);
-    // si une révolution fait 200 pas, et que la vis a un pas de 1mm, alors 20 pas font 1/10ème mm
-    pasParCouche = (int)(0.01 * epaisseurCouche * stepsPerRevolution / pasVis);
-    // nombre de pas pour la remontée d'un cycle
-    pasCycleUp = pasCycleDown - pasParCouche;
-    // on remonte de la valeur initiale plus 1 cm = 10mm
-    pasRemontee = nbCouches * pasParCouche + (int)(20 * stepsPerRevolution / pasVis);
-    affichageTexte("", "", epaisseurCouche, "");
-    modifConfig = false;
-  }
+  if (modifConfig)
+    mode = modeConfig; // artifice pour passer de l'octet 0x0A à l'integer 10...
+
   // Appuis sur les boutons. Par sécurité, la pression doit etre maintenue
   etatStop = digitalRead(boutonStop); // bouton de prise de référence supérieure en début de programme
   if (etatStop == LOW) { // bouton de fin de course haut et prise de référence

@@ -40,14 +40,14 @@ void priseReference(){
   while (digitalRead(boutonStop) != LOW){
     myStepper.step(pas);
   }
+  nbPasMoteur = 0;
   affichage(modePriseRef, ecran2);
   pas = -1;
-  for (int i = 0; i < 500 ; i++){
+  for (int i = 0; i < 750 ; i++){
     myStepper.step(pas);        
+    nbPasMoteur -= pas;
   }
-  nbPasMoteur = 0;
   affichage(modePriseRef, ecran3);
-  mode = modeStop;
-  delay(5000);
-  
+  mode = modePrincipal;
+  delay(3000);  
 }

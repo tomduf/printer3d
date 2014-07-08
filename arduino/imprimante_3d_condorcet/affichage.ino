@@ -111,7 +111,7 @@ void affichage(int mode, int ecran){
           delay(1000);     
           tft.setTextColor(RED);
           tft.setCursor(4,37);
-          tft.print("Descente 500...");       
+          tft.print("Descente 750");       
         break;
         case ecran3 :
           tft.setTextColor(GREEN);
@@ -119,12 +119,84 @@ void affichage(int mode, int ecran){
           tft.fillRect(0, 21, 95, 10, WHITE);
           tft.print("Operation OK");       
           tft.fillRect(0, 37, 95, 10, WHITE);
-          tft.setTextColor(BLACK);
+          tft.fillRect(0, 53, 52, 10, WHITE);
+          tft.setTextColor(BLUE);
+          tft.setCursor(4,53);
+          tft.print("Nb pas ->");       
+          tft.setTextColor(RED);
+          tft.setCursor(64,53);
+          tft.print(nbPasMoteur);       
+        break;
+      }
+    break;
+    case modePrincipal :
+      switch (ecran) {
+        case ecran1 :
+          tft.fillScreen(WHITE);
+          tft.fillRect(0, 0, 96, 16, BLUE);
+          tft.setTextColor(WHITE);
+          tft.setCursor(4,5);
+          tft.print("Imprimante 3D");       
+          tft.setTextColor(GREEN);
+          tft.setCursor(4,21);
+          tft.print("En attente");       
           tft.setCursor(4,37);
-          tft.print("Reference pas :");       
+          tft.print("Raspberry Pi");       
+          tft.setCursor(4,53);
+          tft.setTextColor(BLUE);
+          tft.print("Stop");       
           tft.setTextColor(RED);
           tft.setCursor(70,53);
-          tft.print("0");       
+          tft.print(nbPasMoteur);       
+        break;
+      }
+    break;
+    case modeConfig :
+      switch (ecran) {
+        case ecran1 :
+          tft.fillScreen(WHITE);
+          tft.fillRect(0, 0, 96, 16, BLUE);
+          tft.setTextColor(WHITE);
+          tft.setCursor(4,5);
+          tft.print("Configuration");       
+          tft.setTextColor(GREEN);
+          tft.setCursor(4,21);
+          tft.print("Epaisseur ");       
+          tft.setCursor(60,21);
+          tft.print(epaisseurCouche);       
+        break;
+      }
+    break;
+    case modeStop :
+      switch (ecran) {
+        case ecran1 :
+          tft.fillRect(0, 53, 96, 10, WHITE);
+          tft.setTextColor(BLUE);
+          tft.setCursor(4,53);
+          tft.print("Stop");       
+          tft.setTextColor(RED);
+          tft.setCursor(64,53);
+          tft.print(nbPasMoteur);       
+        break;
+      }
+    break;
+    case modeHaut :
+      switch (ecran) {
+        case ecran1 :
+          tft.fillRect(0, 53, 52, 10, WHITE);
+          tft.setTextColor(BLUE);
+          tft.setCursor(4,53);
+          tft.print("Haut");       
+        break;
+      }
+    break;
+    case modeBas :
+      switch (ecran) {
+        case ecran1 :
+          tft.fillRect(0, 53, 52, 10, WHITE);
+          tft.setTextColor(BLUE);
+          tft.setCursor(4,53);
+          tft.print("Bas");       
         break;
       }
     break;
