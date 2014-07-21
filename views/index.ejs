@@ -40,6 +40,11 @@
                     <input name="nbExpCouche" type="text" id="nbExpCouche" value="3" size="3" maxlength="3">
                 </li>
                 <li>
+                    <label for="dureeExposition">Durée d'exposition:</label>
+                    <input name="dureeExposition" type="text" id="dureeExposition" value="3" size="3" maxlength="3">
+                    s</li>
+                <li>
+                <li>
                     <label for="intervalleEntreExp">Intervalle entre chaque exposition:</label>
                     <input name="intervalleEntreExp" type="text" id="intervalleEntreExp" value="1" size="3" maxlength="3">
                     s</li>
@@ -121,7 +126,9 @@
                     '/' + $("#tempsPauseAvantExpo").val().toString(16) , function(textReponse){
                 console.log("- envoi de la configuration à l'Arduino : " + textReponse);
             });
-            tempoCache = parseInt($("#intervalleEntreExp").val());
+            tempoCache = parseInt($("#intervalleEntreExp").val()) * 1000;
+            tempoVisible = parseInt($("#dureeExposition").val()) * 1000;
+            console.log()
         });
         // déclaration de la mire comme image active (elle doit être la première image dans le HTML)
         $("#boutonMire").click(function () {// si appui sur le bouton
