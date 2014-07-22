@@ -144,9 +144,8 @@ void setup() {
   // Affichage de l'écran d'accueil
   if (SD.begin(SD_CS))
     bmpDraw("logo.bmp", 0, 0);
-  delay(3000);
-  // On débute par la prise de référénce
-  //mode = modePriseRef;
+  // Affichage du mode principal
+  mode = modePrincipal;
 }
 
 void loop() {

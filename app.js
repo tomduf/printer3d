@@ -108,6 +108,8 @@ function main() {
 		console.log("  > Mode de l'Arduino: " + res.toString(16));
         // Lancement de la prise de référence
         wireArduino.writeByte(0x05, function(err){});
+        console.log("  > Lancement de la prise de référence en z...");
+        console.log("  > Surveiller le contact et la descente à 750 pas");
 
 	});
 	
