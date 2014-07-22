@@ -106,6 +106,9 @@ function main() {
 	// Lecture d'un octet
 	wireArduino.readByte(function(err,res){
 		console.log("  > Mode de l'Arduino: " + res.toString(16));
+        // Lancement de la prise de référence
+        wireArduino.writeByte(0x05, function(err){});
+
 	});
 	
 	// Lecture du dossier des miniatures	

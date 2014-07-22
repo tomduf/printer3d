@@ -146,7 +146,7 @@ void setup() {
     bmpDraw("logo.bmp", 0, 0);
   delay(3000);
   // On débute par la prise de référénce
-  mode = modePriseRef;
+  //mode = modePriseRef;
 }
 
 void loop() {
