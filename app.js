@@ -70,13 +70,6 @@ console.log('*******************************************');
 console.log('* Serveur imprimante 3D - Lycée Condorcet *');
 console.log('*******************************************');
 
-// Réception de données i2c Arduino
-wireArduino.on('data', function(data) {
-  // result for continuous stream contains data buffer, address, length, timestamp
-  for (var i = 0; i < data.length; i++){
-	console.log(data[i]);
-   }
-});
 
 // Caméra en arrière plan (une photo régulièrement, pas de flux)
 camera.start();
@@ -102,7 +95,15 @@ function main() {
 		 });
 	  }
 	});
-	
+
+// Déclencheur de réception de données i2c Arduino
+    wireArduino.on('data', function(data) {
+        // result for continuous stream contains data buffer, address, length, timestamp
+        for (var i = 0; i < data.length; i++){
+            console.log(data[i]);
+        }
+    });
+
 	// Lecture d'un octet
 	wireArduino.readByte(function(err,res){
 		console.log("  > Mode de l'Arduino: " + res.toString(16));

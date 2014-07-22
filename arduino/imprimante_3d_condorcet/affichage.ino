@@ -176,7 +176,8 @@ void affichage(int mode, int ecran){
           tft.print("Stop");       
           tft.setTextColor(RED);
           tft.setCursor(64,53);
-          tft.print(nbPasMoteur);       
+          tft.print(nbPasMoteur);
+          envoiPas();     
         break;
       }
     break;

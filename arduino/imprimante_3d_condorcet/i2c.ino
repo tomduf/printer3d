@@ -18,4 +18,9 @@ void envoiMode(){
   Wire.write(mode);
 }
 
+// Envoi du nb de pas du moteur
+void envoiPas(){
+  Wire.write("P");
+  Wire.write(nbPasMoteur);
+}
 
